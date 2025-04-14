@@ -1,0 +1,229 @@
+<%- include('partials/header') -%>
+
+<div class="container">
+  <div class="row mt-5">
+      <div class="col-6">
+        <h2 class="display-6">Admin Page</h2>
+          <div>
+              <p><strong>User Name</strong>: <%= user.userName %></p>
+              <p><strong>Email</strong>: <%= user.email %></p>
+              <button>
+                <a href="/admin/logout">Logout</a>
+              </button>
+          </div>
+          <div class="mt-5">
+            <h3>Add a post</h3>
+            <form action="/admin/createPost" enctype="multipart/form-data" method="POST">
+              <div class="mb-2">
+                  <label for="title" class="form-label">Title</label>
+                  <input type="text" required class="form-control" id="title" name="title">
+              </div>
+              <div class="mb-2">
+                <label for="caption" class="form-label">Caption</label>
+                <textarea class="form-control" id="caption" name="caption"></textarea>
+              </div>
+              <div class="mb-2">
+                <label for="price" class="form-label">Price</label>
+                <input type = "number" class="form-control" id="price" name="price" required min = '0.00' step= ".01">
+              </div>
+              <div class="mb-2">
+                <label for="quantity" class="form-label">Quantity</label>
+                <input type = "number" class="form-control" id="quantity" name="quantity" required min = '1' step= "1" placeholder="1">
+              </div>
+              <div class="mb-2">
+                <label for="category" class="form-label">Choose a Category:</label>
+                <select name="category" id="category">
+                  <option value="just art">Just Art</option>
+                  <option value="cups">Cups</option>
+                  <option value="bowls">Bowls</option>
+                  <option value="plates">plates</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <fieldset class="mb-2">
+                <legend class="form-label">Put Item on Sale?</legend>
+                <div class ='radio me-4'>
+                  <input type="radio" class ='radio' name="onSale" id = "sale false" value='false' checked> 
+                  <label for="sale false" class ='radio'>False</label>
+                </div>
+                <div class ='radio'>
+                  <input type="radio" class ='radio' name="onSale" id = "sale true" value='true' > 
+                  <label for="sale true" class ='radio'>True</label>
+                </div>
+              </fieldset>
+              <fieldset class="mb-2">
+                <legend class="form-label">Favorite?</legend>
+                <div class ='radio me-4'>
+                  <input type="radio" class ='radio' name="favorite" id = "favorite false" value='false' checked> 
+                  <label for="favorite false" class ='radio'>False</label>
+                </div>
+                <div class ='radio'>
+                  <input type="radio" class ='radio' name="favorite" id = "favorite true" value='true' > 
+                  <label for="favorite true" class ='radio'>True</label>
+                </div>
+              </fieldset>
+              <div>
+                <label for="discount" class="form-label">Discount</label>
+                <input type = "number" class="form-control" id="discount" name="discount" value = '0.00' placeholder='0.00' min = '0.00' step= ".01">
+              </div>              
+              <div class="mb-2">
+                <label for="imgUpload" class="form-label">Image</label>
+                <input type="file" class="form-control" id="imgUpload" name="files" multiple>
+              </div>
+              <button type="submit" class = 'mt-3' value="Upload">Submit</button>
+            </form>
+          </div>
+      </div>
+      <div class="col-6">
+
+        <ul class="row list-unstyled">
+        <% for(let i=0; i<posts.length; i++) {%>
+          
+          <% if (i == 0 || posts[i].category != posts[i-1].category) { %>
+            <h2 class="display-6"><%=posts[i].category[0].toUpperCase() + posts[i].category.slice(1) %></h2>
+          <% } %>
+          <!-- Start of list item -->
+          <li class="col-6 mt-3" id ="<%= posts[i].id %>" >
+            <a href="/<%= posts[i]._id%>">
+              <% console.log(posts[i].images)%>
+              <img class="card-img-top" src="<%= posts[i].images[0]['url']%>">
+            </a>
+            <!-- image and anchor -->
+             <div class="d-flex justify-content-between p-2">
+                <h6 class=""><%=posts[i].title%></h6>
+                <!-- title -->
+                <div class="d-flex">
+                  <form 
+                    action="/admin/isFavorite/<%= posts[i].id %>?_method=PUT"
+                    method="POST" 
+                    class="me-1">
+                      <button class="<%= posts[i].favorite === true ? 'fa fa-star iconButton favorite' : 'fa fa-star iconButton' %>" type="submit"></button>
+                  </form>
+                  <form 
+                    action="/admin/deletePost/<%= posts[i].id %>?_method=DELETE"
+                    method="POST" 
+                    class="">
+                      <button class="fa fa-trash iconButton" type="submit"></button>
+                  </form>
+                  <!-- trash button -->
+                </div>
+             </div>
+            
+            <div class="btn-group-sm">
+              <!--available button  -->
+              <button 
+              class="<%= posts[i].available === true ? 'btn btn-outline-success btn-sm updateQuantityButton' : 'btn btn-outline-danger btn-sm updateQuantityButton' %>"
+              id= 'availableButton'
+              type="button">
+                Update Availability: <%=posts[i].quantity%>
+              </button>
+              <!-- Quantity dropdown toggle button -->
+              <form 
+              action="/admin/updateQuantity/<%= posts[i].id %>?_method=PUT" 
+              method="POST" 
+              class="hidden"
+              name ="updateQuantityForm"
+              id ="updateQuantityForm">
+                  <label for="updateQuantity" class="mt-2">Quantity:</label>
+                  <input type="number" class="" id="updateQuantity" name="updateQuantity" min = '0' step= "1">
+                  <button class="p-2 my-2" type="submit">Update</button>
+              </form>    
+              
+              <!-- discount button -->
+              <button 
+              class="<%= posts[i].onSale === true ? 'btn btn-outline-warning btn-sm changeDiscountButton' : 'btn btn-outline-success btn-sm  changeDiscountButton' %> "
+              type="button">
+                Change Discount: <%=posts[i].discount%>
+              </button>
+              <!-- discount dropdown toggle button -->
+              <form 
+              action="/admin/onSale/<%= posts[i].id %>?_method=PUT" 
+              method="POST" 
+              class="hidden"
+              name ="onSaleForm"
+              id ="onSaleForm">
+                  <label for="discountUpdate" class="mt-2">Enter Discount:</label>
+                  <input type="number" class="" id="discountUpdate" name="discountUpdate" min = '0.00' step= ".01">
+                  <button class="p-2 my-2" id ='onSaleButton' type="submit">Update</button>
+              </form>        
+
+              <!-- Update All button -->
+              <button 
+              class= 'btn btn-outline-success btn-sm updateButton' %> "
+              type="button"
+              data-bs-toggle="modal" 
+              data-bs-target="#productModal"
+              data-id="<%= posts[i].id %>"
+              data-title="<%= posts[i].title %>"
+              data-caption="<%= posts[i].caption %>"
+              data-price="<%= posts[i].price %>"
+              data-category="<%= posts[i].category %>"
+              data-images= "<%= JSON.stringify(posts[i].images) %>"
+              >
+                Update Details
+              </button>
+            
+            </div>
+        </li>
+        <% } %>
+        </ul>
+        <button class = 'centeredButton'>
+          <a href="/">Return to Front Page</a>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form id="productForm" action="" method="POST" enctype="multipart/form-data">
+        <div class="modal-header">
+          <h5 class="modal-title" id="productModalLabel">Update Product</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          <input type="hidden" name="_id">
+          <div class="mb-3">
+            <label class="form-label">Title</label>
+            <input type="text" name="title" class="form-control">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Caption</label>
+            <input type="text" name="caption" class="form-control">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Price</label>
+            <input type = "number" class="form-control" name="price" required min = '0.00' step= ".01">
+          </div>
+          <div class="mb-3">
+            <label for="categoryModal" class="form-label">Category:</label>
+                <select name="category" id="categoryModal">
+                  <option value="just art">Just Art</option>
+                  <option value="cups">Cups</option>
+                  <option value="bowls">Bowls</option>
+                  <option value="plates">plates</option>
+                  <option value="other">Other</option>
+                </select>
+          </div>
+          <div class="mb-3">
+            <div id="imagePreviewContainer" class="d-flex flex-wrap mb-3"></div>
+            <label for="updateImgUpload" class="form-label">Image</label>
+            <input type="file" name='images' class="form-control" id="updateImgUpload" multiple>
+          </div>
+          <!-- Add more fields as needed -->
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<%- include('partials/footer') -%>

@@ -1,0 +1,39 @@
+
+<%- include('partials/header') -%>
+
+    <div class="container">
+      <p class="text-center py-3 lead">Thank You for your Support!</p>
+      <div class="container">
+        <table class="table text-center">
+            <thead>
+                <tr>
+                  <th scope="col">Description</th>
+                  <th scope="col">Your Art</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Qty</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+
+            </tbody>
+            <tfoot>
+              <tr>
+                <td></td>
+                <th>Total</th>
+                <td id="sum"></td>
+                <td id="count"></td>
+              </tr>
+            </tfoot>
+        </table>
+
+        <div class="pt-3 pb-5 text-end">
+            <a href="/" class="btn btn-outline-success">Keep Shopping</a>
+            <a href="#" id="checkout-btn" class="btn btn-outline-success">Checkout</a>
+        </div>
+      </div>
+    </div>
+  </body>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+  <script src="/main.js"></script>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Hunter's Wheel</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico"/>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+	</head>
+	<body class="is-preload">
+
+		<!-- Header -->
+			<section id="header">
+				<header>
+					<h1 class = ''>The Hunter's Wheel</h1>
+					<p class="text-center lead">Clay by Nancy</p>
+				</header>
+			</section>
+
+		<!-- First -->
+			<section id="first" class="main">
+				<header>
+					<div class="container">
+						<h2>Don't just buy art. Use it!</h2>
+						<p>Art doesn't have to be confined to the walls never to be touched. It can be in anything and everywhere. Surround yourself with the beauty of human creativity. And please throw away that corporate slip-cast mug from some conference in 2017. You deserve more.</p>
+						<p>Don't ever save anything for a special occasion. Being alive is a special occasion -Mary Engelbreit</p>
+					</div>
+				</header>
+			</section>
+
+		<!-- Second -->
+			<section id="second" class="main">
+				<div class="content dark style2">
+					<div class="container">
+						<div class="row">
+							<div class="col-12">
+								<h3 class="headerRecentWork">Recent Work</h3>
+							</div>
+							<div class="col-12">
+								<ul class="row">
+									<% for(var i=0; i<posts.length; i++) {%>
+									  <!-- Start of list item -->
+									  <li class="col-4 col-6-narrow col-12-mobile" id ="<%= posts[i].id %>" >
+										<a href="/<%= posts[i]._id%>" class="image fit">
+										  <img class="" src="<%= posts[i].image%>">
+										</a>
+										<!-- image and anchor -->
+										 <div class="">
+											 <!-- title -->
+											<h6 class=""><%=posts[i].title%></h6>
+										</div>
+									  </li>
+									  <% } %>
+								  </ul>
+							</div>
+							
+							
+						</div>
+						<h6>
+							<a href="#third" class="button scrolly">See More</a>
+						</h6>
+					</div>
+				</div>
+			</section>
+
+		<!-- Third -->
+			<section id="third" class="main">
+				<header>
+					<div class="container">
+						<h2>About the Artist</h2>
+						<p>Look at me. Don't look at me!</p>
+					</div>
+				</header>
+	
+				<!-- <div class="content dark style3">
+					<div class="container">
+						<span class="image featured"><img src="images/pic07.jpg" alt="" /></span>
+						<div class="row">
+							<div class="col-4 col-12-narrow">
+								<h3>Diam vivamus turpis lorem sodales lectus ornare</h3>
+								<p>Lectus ante vel nunc euismod est turpis sodales. Diam tempor dui lacinia
+								accumsan vivamus augue cubilia vivamus nisi eu eget ornare varius gravida dolore
+								euismod lorem ipsum dolor sit amet consequat. vivamus nisi eu eget ornare varius
+								gravida dolore euismod lorem ipsum dolor sit amet consequat. vivamus nisi eu
+								eget ornare et magna.</p>
+							</div>
+							<div class="col-4 col-12-narrow">
+								<p>Gravida dis placerat lectus ante vel nunc euismod est turpis sodales. Diam
+								tempor dui lacinia eget ornare varius gravida. Gravida dis placerat lectus ante
+								vel nunc euismod est turpis sodales. Diam tempor dui lacinia accumsan vivamus
+								augue cubilia vivamus nisi eu eget ornare varius gravida euismod.  Gravida dis
+								lorem ipsum dolor placerat magna tempus feugiat.</p>
+							</div>
+							<div class="col-4 col-12-narrow">
+								<footer>
+									<a href="#fourth" class="button scrolly">Ipsum ornare lorem dolor</a>
+								</footer>
+							</div>
+						</div>
+					</div>
+				</div> -->
+			</section>
+		
+		<!-- Footer -->
+			<section id="footer">
+				<ul class="icons">
+					<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+					<li><a href="#" class="icon brands fa-linkedin"><span class="label">Twitter</span></a></li>				
+					<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+				</ul>
+				<div class="copyright">
+					<ul class="menu">
+						
+					</ul>
+				</div>
+			</section>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
