@@ -7,8 +7,14 @@ const { ensureAuth, ensureGuest } = require("../middleware/auth");
 
 //Admin Routes 
 router.get("/profile", ensureAuth, adminController.getProfile);
-router.post("/createPost", upload.array("files", 4), adminController.createPost);
-router.put("/updatePost/:id", upload.array('images', 4), adminController.updatePost);
+router.post("/createPost", upload.fields([
+    { name: "mainImage", maxCount: 1},
+    { name: "galleryImages", maxCount: 3},
+]), adminController.createPost);
+router.put("/updatePost/:id", upload.fields([
+    { name: "mainImage", maxCount: 1},
+    { name: "galleryImages", maxCount: 3},
+]), adminController.updatePost);
 router.put("/onSale/:id", adminController.onSale);
 router.put("/updateQuantity/:id", adminController.updateQuantity);
 router.put("/isFavorite/:id", adminController.isFavorite);

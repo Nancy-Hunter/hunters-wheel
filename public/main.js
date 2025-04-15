@@ -14,17 +14,28 @@ productModal.addEventListener('show.bs.modal', function (event) {
     form.price.value = button.getAttribute('data-price');
     form.category.value = button.getAttribute('data-category');
 
-    // Clear any old preview images
-    const previewContainer = document.getElementById("imagePreviewContainer")
-    previewContainer.innerHTML = ""
+    // Clear any old main preview images
+    const mainPreviewContainer = document.getElementById("mainPreviewContainer")
+    mainPreviewContainer.innerHTML = ""
+    
+    const mainImg = document.createElement('img');
+    mainImg.src = button.getAttribute('data-mainImageURL')
+    mainImg.classList.add("img-thumbnail", "m-1"); // styling
+    mainImg.style.maxWidth = "100px";
+    mainPreviewContainer.appendChild(mainImg); 
+    
+    // Clear any old gallery preview images
+    const galleryPreviewContainer = document.getElementById("galleryPreviewContainer")
+    galleryPreviewContainer.innerHTML = ""
+
     // Parse image data and display previews
-    const images = JSON.parse(button.getAttribute('data-images') || '[]')
-    images.forEach(img => {
+    const galleryImages = JSON.parse(button.getAttribute('data-galleryImages') || '[]')
+    galleryImages.forEach(img => {
       const newImg = document.createElement('img');
       newImg.src = img.url;
       newImg.classList.add("img-thumbnail", "m-1"); // styling
       newImg.style.maxWidth = "100px";
-      previewContainer.appendChild(newImg);
+      galleryPreviewContainer.appendChild(newImg);
     })
 })
 

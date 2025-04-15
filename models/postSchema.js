@@ -5,7 +5,13 @@ const PostSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  images: [
+  mainImageURL: {
+    type: String,
+  },
+  mainImageID: {
+    type: String,
+  },
+  galleryImages: [
     {
       url : String,
       cloudinaryId: String,
