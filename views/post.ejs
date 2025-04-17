@@ -1,15 +1,21 @@
 <%- include('partials/header') -%>
 
-    <div class="container lead">
-
-    <div class="row justify-content-center mt-5">
-    <div class="col-6 text-center d-flex flex-column">
-      <h2 class="display-6 text-start pb-1 brown"><%= post.title %></h2>
-      <img class="img-fluid" src="<%= post.image%>" />
-      <a class="btn btn-outline-success my-4" href="/category/<%= post.category %>">Keep smelling the Flowers</a>
+  <div class="container postContainer">
+    <div class="IMAGES">
+      <h2 class="postTitle"><%= post.title %></h2>
+      <div class="mainImageContainer">
+        <img class="img-fluid mainImage" src="<%= post.mainImageURL%>" />
+        <% if (post.galleryImages.length>0) { %>
+          <div class="galleryContainer">
+            <% for(let i = 0; i < post.galleryImages.length; i++) { %>
+              <img class="gallery" src = "<%= post.galleryImages[i]['url'] %>">
+            <% } %>
+          </div>
+        <% } %>
+        <a class="btn btn-outline-success my-4" href="/category/<%= post.category %>">Keep Looking</a>
+      </div>
     </div>
-
-    <div class="col-4 mt-5 brown mb-3">
+    <div class="postInfo">
       <p class=""><%= post.caption %></p>
       <% if (post.onSale==true) { %>
         <p class=""><s>$<%= Number.parseFloat(post.price).toFixed(2) %></s></p> 
@@ -18,15 +24,14 @@
         <p class="">$<%= Number.parseFloat(post.price).toFixed(2) %></p> 
       <% } %>
       
-      <button class="btn btn-outline-success cartButton add-to-cart" data-id="<%= post._id %>" data-img="<%= post.image %>" data-price="<%= Number.parseFloat(post.price - post.discount).toFixed(2) %>" data-title="<%= post.title %>">Add to Cart</button>
+      <button class="btn btn-outline-success cartButton add-to-cart" data-id="<%= post._id %>" data-img="<%= post.mainImageURL %>" data-price="<%= Number.parseFloat(post.price - post.discount).toFixed(2) %>" data-title="<%= post.title %>">Add to Cart</button>
       <a href= '/cart' class="btn btn-outline-success">Checkout</a>
     </div>
+        
+    <a href="/cart" class="shopping-cart" data-product-count= '0'>
+      <span class="cart-icon">&#128722;</span>
+    </a>
   </div>
-  
-  <a href="/cart" class="shopping-cart" data-product-count= '0'>
-    <span class="cart-icon">&#128722;</span>
-  </a>
-</div>
 </body>
 <script>
   let productCount = 0;

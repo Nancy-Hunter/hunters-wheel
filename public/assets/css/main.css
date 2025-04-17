@@ -2499,26 +2499,91 @@ h1, h2, .headerRecentWork {
 	font-family: "Marcellus", serif;
 }
 
-	/* header styles */
+/* post styles */
 
-.headerCustom {
-	background-image: url(../../images/toolsbw.jpg);
-	/* background: linear-gradient(to right, rgba(255,255,255, 0.7) 0 100%); */
-	min-height: 25rem;
-	background-size: 100%;
-	background-position: 0 50%;
-	font-family: "Marcellus", serif;
- 	font-weight: 400;
-  	font-style: normal;
-} 
-.headerCustom h1 {
-	font-size: 3.5rem;
-	color:#994126;
-	padding: 2rem 0 2rem;
+.postTitle {
+	text-align: start;
+	font-size: 2.3rem;
 }
-.headerCustom p {
+.postInfo {
 	font-size: 1.4rem;
+	margin-top: 20%;
+	width: 30%;
 }
+.IMAGES {
+	width:50%;
+}
+.postContainer {
+	margin-top: 2rem;
+	display: flex;
+	gap: 2em;
+}
+/* post gallery and image styles */
+
+.mainImageContainer {
+	display: flex;
+	flex-direction: column;
+}
+.mainImage {
+	margin: 0 auto;
+	width: 80%;
+	border-radius: 12px;
+	transition: all 0.3s ease;
+}
+.galleryContainer {
+	margin-top: 2rem;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	gap: .5rem;
+}
+.gallery {
+	width: 30%;
+	aspect-ratio: 1 / 1;
+	border-radius: 8px;
+	object-fit: cover;
+	transition: transform 0.2s ease;
+}
+.gallery:hover {
+	transform: scale(1.05);
+}
+/* mobile media queries for post page */
+
+@media screen and (max-width: 736px) {
+	.postContainer {
+		flex-direction: column;
+		margin: 2rem auto 0;
+	}
+	.IMAGES {
+		margin: 0 auto;
+	}
+	.postInfo {
+		margin: 0 auto 10%;
+		width: 50%;
+	}
+	.mainImage {
+		width: 100%;
+	}
+}
+
+/* discount too high error alert */
+
+.custom-alert {
+	padding-right: .6rem;
+}
+.custom-close {
+	opacity: .6;
+	background-color: hsl(354, 67%, 91%) ;
+	padding: 0 .5rem;
+	color: black;
+	margin-left: .6rem;
+  }
+.custom-close:hover {
+    background-color: transparent;
+    opacity: 1;  
+	box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.2); 
+	border-radius: 0.25rem;           
+  }
 
 	/* add to cart animation */
 

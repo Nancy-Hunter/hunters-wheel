@@ -7,7 +7,10 @@ module.exports = {
   getProfile: async (req, res) => {
     try {
       const posts = await Post.find().sort( { category: "asc" } );
-      res.render("profile.ejs", { posts: posts, user: req.user });
+      res.render("profile.ejs", { 
+        posts: posts, 
+        user: req.user, 
+        error: req.flash("error"), });
     } catch (err) {
       console.log(err);
     }
@@ -132,12 +135,15 @@ module.exports = {
       const post = await Post.findById(req.params.id)
       const rawDiscount = parseFloat(req.body.discountUpdate).toFixed(2)
       const discount = rawDiscount <= post.price ? rawDiscount : post.price
-      let onSaleFlag = req.body.discountUpdate>0
+      let onSaleFlag = discount > 0
       await Post.findByIdAndUpdate(req.params.id, {
         discount: discount,
         onSale: onSaleFlag,
       })
-      console.log("item sale status changed!");
+      console.log("item sale status changed!")
+      if (rawDiscount>post.price) {
+        req.flash("error", "Discount too high. Auto-adjusted to match price.")
+      }
       res.redirect(`/admin/profile#${req.params.id}`);
     } catch (err) {
       console.log(err);

@@ -14,7 +14,7 @@
           <% if (posts[i].available==true) { %>
             <li class="col-6 col-lg-4 justify-content-between mt-5">
               <a class="brown link-hover text-decoration-none" href="/<%= posts[i]._id%>">
-                <img class="img-fluid" src="<%= posts[i].image%>">
+                <img class="img-fluid" src="<%= posts[i].mainImageURL%>">
                 <p class="display-6 brown"><%= posts[i].title %></p>
                 <div class="d-flex">
                   <p><%= posts[i].caption %></p>
