@@ -4,7 +4,7 @@
     <div class="IMAGES">
       <h2 class="postTitle"><%= post.title %></h2>
       <div class="mainImageContainer">
-        <img class="img-fluid mainImage" src="<%= post.mainImageURL%>" />
+        <img class="img-fluid mainImage" id ="leadImage" src="<%= post.mainImageURL%>" />
         <% if (post.galleryImages.length>0) { %>
           <div class="galleryContainer">
             <% for(let i = 0; i < post.galleryImages.length; i++) { %>

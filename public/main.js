@@ -1,9 +1,19 @@
+// switch gallery images and main for post.ejs
+
+const leadImage = document.getElementById("leadImage");
+const thumbnails = document.querySelectorAll(".gallery");
+thumbnails.forEach((thumb) => {
+  thumb.addEventListener("click", () => {
+    const tempSrc = leadImage.src
+    leadImage.src = thumb.src
+    thumb.src = tempSrc
+  })
+})
 // opens modal popup for editing on profile page
 
 const productModal = document.getElementById("productModal")
 productModal.addEventListener('show.bs.modal', function (event) {
-    const button = event.relatedTarget;
-    console.log(button.dataset)
+    const button = event.relatedTarget
     const form = document.getElementById('productForm');
 
     form.setAttribute('action', `/admin/updatePost/${button.getAttribute('data-id')}?_method=PUT`);
@@ -38,8 +48,6 @@ productModal.addEventListener('show.bs.modal', function (event) {
       galleryPreviewContainer.appendChild(newImg);
     })
 })
-
-
 
 
 

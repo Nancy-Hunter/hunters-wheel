@@ -2003,7 +2003,6 @@ input::-moz-focus-inner {
 		-webkit-transition: all 0.25s ease-in-out;
 		-ms-transition: all 0.25s ease-in-out;
 		transition: all 0.25s ease-in-out;
-		-webkit-appearance: none;
 		position: relative;
 		display: inline-block;
 		background: #3d3d3d;
@@ -2497,6 +2496,32 @@ input::-moz-focus-inner {
 	/* my styles */
 h1, h2, .headerRecentWork {
 	font-family: "Marcellus", serif;
+}
+/* navigation bar */
+
+.link{
+	padding: 0 1.5rem;
+	border: none;
+}
+.link:hover {
+	color: black;
+}
+.navTag {
+	display: inline;
+	margin: auto 2rem;
+	font-size: 1.2rem;
+	font-weight: 600;
+}
+.linksContainer {
+	display: flex;
+	justify-content: space-around;
+}
+.customNav{
+	padding: .3rem 1rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 2px solid #666;
 }
 
 /* post styles */
