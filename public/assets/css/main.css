@@ -2664,7 +2664,9 @@ h1, h2, .headerRecentWork {
 	text-align:center;
 	line-height: 2rem;
   }
-  
+  .cartImage {
+	width: 40%;
+  }
   .cart-icon {
 	font-size: 2rem;
 	transition: .5s ease-in-out;

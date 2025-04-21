@@ -1,6 +1,10 @@
+//Use .env file in config folder
+require("dotenv").config({ path: "./config/.env" });
+
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 const passport = require("passport");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
@@ -10,10 +14,9 @@ const logger = require("morgan");
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const adminRoutes = require("./routes/admin");
+const stripeRoutes = require("./routes/stripeRoutes");
 
 
-//Use .env file in config folder
-require("dotenv").config({ path: "./config/.env" });
 
 // Passport config
 require("./config/passport")(passport);
@@ -57,6 +60,7 @@ app.use(flash());
 //Setup Routes For Which The Server Is Listening
 app.use("/", mainRoutes);
 app.use("/admin", adminRoutes);
+app.use("/checkout", stripeRoutes)
 
 //Server Running
 app.listen(process.env.PORT, () => {
