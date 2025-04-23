@@ -36,6 +36,7 @@
           <button 
             type='button' 
             class="btn btn-outline-success cartButton me-2" 
+            data-stock = "<%=post.quantity%>"
             data-id="<%= post._id %>" 
             data-img="<%= post.mainImageURL %>" 
             data-price="<%= Number.parseFloat(post.price - post.discount).toFixed(2) %>">Add to Cart</button>

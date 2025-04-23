@@ -25,22 +25,31 @@ function addToCart(event) {
   let price = Number(event.target.dataset.price)
   let id = event.target.dataset.id
   let image = event.target.dataset.img
+  const stock = Number(event.target.dataset.stock)
   // Find the nearest select inside the same form
   const form = event.target.closest(".addToCartForm")
   const select = form.querySelector(".selectQty")
   const qty = Number(select.value)
 
-if (id in cart) {
-  cart[id].qty += qty
-  
-} else {
-  cart[id] = {
-      image : image,
-      price: price,
-      qty: qty
+  const currentQtyInCart = cart[id]?.qty || 0;
+  const newTotalQty = currentQtyInCart + qty;
+
+  if (newTotalQty > stock) {
+    alert(`Only ${stock} in stock. You already have ${currentQtyInCart} in your cart.`);
+    return; // prevent adding
   }
-}
-count += qty;
+  
+  if (id in cart) {
+    cart[id].qty += qty
+    
+  } else {
+    cart[id] = {
+        image : image,
+        price: price,
+        qty: qty
+    }
+  }
+  count += qty;
 
   localStorage.setItem("cart", JSON.stringify(cart))
   localStorage.setItem("count", count)

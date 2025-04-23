@@ -71,6 +71,10 @@ async function updateCart() {
             delete cart[id];
             alert('An item in your cart is no longer available and has been removed.');
         }
+        if (cart[id]['qty']>verifiedCart[id]['qty']) {
+            cart[id]['qty'] = verifiedCart[id]['qty']
+            // alert(`Sorry, quantity of ${cart[id]['productTitle']} was updated due to lack of stock`)
+        }
     }
   }
   //creates item row in table
