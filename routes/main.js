@@ -9,5 +9,6 @@ router.get("/category/:theme", postsController.getCategory)
 router.get("/cart", postsController.getCart)
 router.get("/deals", postsController.getDeals)
 router.get("/:id", postsController.getPost)
+router.post("/verify", postsController.verifyProduct)
 
 module.exports = router;

@@ -11,21 +11,8 @@ thumbnails.forEach((thumb) => {
 })
 
 //set up for add to cart at post and cart
-let count = 0;
-let sum = 0;
-let cart = {};
-
-if (localStorage.getItem("count")) {
-    count = parseInt(localStorage.getItem("count"));
-}
-
-if (localStorage.getItem("sum")) {
-    sum = +JSON.parse(localStorage.getItem("sum")).toFixed(2);
-}
-
-if (localStorage.getItem("cart")) {
-    cart = JSON.parse(localStorage.getItem("cart"));
-}
+let cart = JSON.parse(localStorage.getItem("cart")) || {};
+let count = Number(localStorage.getItem("count")) || 0;
 
 //update Cart in local storage at post.ejs
 
@@ -35,27 +22,27 @@ addToCartButton.forEach(function (el) {
   el.addEventListener('click', addToCart)
 })
 function addToCart(event) {
-  let price = Number(event.target.dataset.price);
-  let productTitle = event.target.dataset.title;
-  let id = event.target.dataset.id;
+  let price = Number(event.target.dataset.price)
+  let id = event.target.dataset.id
   let image = event.target.dataset.img
+  // Find the nearest select inside the same form
+  const form = event.target.closest(".addToCartForm")
+  const select = form.querySelector(".selectQty")
+  const qty = Number(select.value)
 
 if (id in cart) {
-  cart[id].qty++;
+  cart[id].qty += qty
+  
 } else {
-  let cartItem = {
+  cart[id] = {
       image : image,
-      productTitle: productTitle,
       price: price,
-      qty: 1
-  };
-  cart[id] = cartItem
+      qty: qty
+  }
 }
-  count++;
-  sum += +price;
+count += qty;
 
-  localStorage.setItem("cart", JSON.stringify(cart));
-  localStorage.setItem("sum", sum)
+  localStorage.setItem("cart", JSON.stringify(cart))
   localStorage.setItem("count", count)
   
   let shoppingCart = document.querySelector('.shopping-cart')

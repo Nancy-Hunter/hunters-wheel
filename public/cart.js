@@ -1,161 +1,208 @@
 //set up for add to cart at post and cart
 let count = 0;
 let sum = 0;
-let cart = {};
-
-if (localStorage.getItem("count")) {
-    count = parseInt(localStorage.getItem("count"));
-}
-
-if (localStorage.getItem("sum")) {
-    sum = +JSON.parse(localStorage.getItem("sum")).toFixed(2);
-}
-
-if (localStorage.getItem("cart")) {
-    cart = JSON.parse(localStorage.getItem("cart"));
-}
-
+let cart = JSON.parse(localStorage.getItem("cart")) || {}
 
 //Updates table in checkout
-function updateCart() {
-    //calculates total in cart including tax, shipping and handling, and potential to add discount
-    document.getElementById("sum").textContent = (Number.parseFloat(sum)+(Number.parseFloat(sum) * .07) + 10).toFixed(2)
-    document.getElementById("count").textContent = count;
-    let tbody = document.getElementById("tbody");
-  
+async function updateCart() {
+    cart = JSON.parse(localStorage.getItem("cart")) || {}
+    sum = 0
+    count = 0
+
+    //Clears Table
+    let tbody = document.getElementById("tbody")
+    tbody.innerHTML = ''
+    //if cart is empty returns and displays message
     if (Object.keys(cart).length === 0) {
-      let tr = document.createElement('tr')
-      let emptyCart= document.createElement('td')
-      emptyCart.textContent =`Your Cart is Currently Empty`
-      emptyCart.setAttribute('colspan', 4)
-      tr.appendChild(emptyCart)
-  
-      tbody.appendChild(tr)
-    } else {
-      for (let id in cart) {
-        let item = cart[id];
-        let tr = document.createElement('tr')
+      localStorage.setItem("count", 0)
+      displayEmptyCart()
+      updateTotals()
+      return
+    } 
+    //fetch verified cart
+    const verifiedCart = await fetchVerifiedCart()
+    //remove unverified items from local storage cart
+    cleanCart(verifiedCart)
+    localStorage.setItem("cart", JSON.stringify(cart))
     
-        let img_td = document.createElement('td');
-        img_td.innerHTML =`<a href='/post/${id}'><img src= '${item.image}' alt = 'bouquet' class='cartImage'></a>`
-        tr.appendChild(img_td)
-    
-        let productTitle_td = document.createElement('td')
-        productTitle_td.innerHTML = `<a href='/post/${id}' class='brown'>${item.productTitle}</a>`
-        tr.appendChild(productTitle_td)
-    
-    
-        let price_td = document.createElement("td");
-        price_td.textContent = Number.parseFloat(item.price).toFixed(2);
-        tr.appendChild(price_td);
-    
-        let editButton = document.createElement("td")
-        editButton.innerHTML = `
-          <select class="p-2" name = 'editQTY' data-id="${id}"
-              onchange="editFromCart(this, +this.value)">
-            <option>${item.qty}</option>
-            <option value=1>1</option>
-            <option value=2>2</option>
-            <option value=3>3</option>
-            <option value=4>4</option>
-            <option value=5>5</option>
-            <option value=6>6</option>
-            <option value=7>7</option>
-            <option value=8>8</option>
-            <option value=9>9</option>
-            <option value=10>10</option>
-        </select>`
-        tr.appendChild(editButton)
-    
-        let deleteButton = document.createElement("td")
-        deleteButton.innerHTML = `<span data-id="${id}" class ="deleteCart"><i data-id="${id}" class="deleteCart fa fa-times px-2 " aria-hidden="true"></i>Delete</span>`
-        tr.appendChild(deleteButton)
-    
-        tbody.appendChild(tr)
+    //build item rows
+    for (let id in verifiedCart) {
+      let item = verifiedCart[id]
+      tbody.appendChild(createCartRow(id, item))
+
+      if (cart[id]) {
+        sum += (item.price - item.discount) * cart[id]['qty']
+        count += cart[id]['qty']
       }
-      
-      let space1 = document.createElement('td');
-      let space2 = document.createElement('td');
-    //   let space3 = document.createElement('td');
-      
-      let taxesTR = document.createElement('tr')
-      let shippingTR = document.createElement('tr')
-    //   let discountTR = document.createElement('tr')
-  
-      let taxes = document.createElement('td');
-      taxes.textContent =`Taxes 7%`
-      taxesTR.appendChild(space1)
-      taxesTR.appendChild(taxes)
-      
-      let taxesValue = document.createElement('td');
-      taxesValue.textContent =`${(Number.parseFloat(sum).toFixed(2) * .07).toFixed(2)} `
-      taxesTR.appendChild(taxesValue)
-      
-      let shipping = document.createElement('td');
-      shipping.textContent =`Shipping and Handling`
-      shippingTR.appendChild(space2)
-      shippingTR.appendChild(shipping)
-  
-      let shippingValue = document.createElement('td');
-      shippingValue.textContent =`10.00`
-      shippingTR.appendChild(shippingValue)
-  
-    //   let discount = document.createElement('td');
-    //   discount.textContent =`Discount 15% `
-    //   discountTR.appendChild(space3)
-    //   discountTR.appendChild(discount)
-  
-    //   let discountValue = document.createElement('td');
-    //   discountValue.textContent =`-${(Number.parseFloat(sum).toFixed(2) * .15).toFixed(2)}`
-    //   discountTR.appendChild(discountValue)
-  
-      tbody.appendChild(taxesTR)
-      tbody.appendChild(shippingTR)
-    //   tbody.appendChild(discountTR)
     }
+    
+    appendSummaryRows(tbody)
+    updateTotals()
+    
+    localStorage.setItem("count", count)
   }
   updateCart()
   
-  
-  //Adds delete buttons in checkout page
-  const deleteFromCartButton = document.querySelectorAll(".deleteCart")
-  
-  deleteFromCartButton.forEach(function (el) {
-    el.addEventListener('click', deleteFromCart)
-  })
-  function deleteFromCart(event) {
-    let cart = JSON.parse(localStorage.getItem("cart"))
-    let productID = event.target.dataset.id
+  //HELPER FUNCTIONS: 
+
+  //display for empty cart
+  function displayEmptyCart() {
+    let tr = document.createElement('tr')
+    let emptyCart= document.createElement('td')
+    emptyCart.textContent =`Your Cart is Currently Empty`
+    emptyCart.setAttribute('colspan', 4)
+    tr.appendChild(emptyCart)
+    document.getElementById("tbody").appendChild(tr);
+  }
+
+  //fetch for verified cart
+  async function fetchVerifiedCart() {
+    const response = await fetch('/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ cart })
+    });
+    return response.json();
+  }
+  //removes cart items from local storage that do not have valid ID or availability
+  function cleanCart(verifiedCart) {
     for (let id in cart) {
-      let item = cart[id]
-      if (id == productID) {
-        sum -= +item.qty * Number.parseFloat(item.price).toFixed(2)
-        count -= +item.qty
-        delete cart[id]
-      }
+        if (!verifiedCart.hasOwnProperty(id)) {
+            delete cart[id];
+            alert('An item in your cart is no longer available and has been removed.');
+        }
     }
-    localStorage.setItem("sum", sum)
-    localStorage.setItem("count", count)
+  }
+  //creates item row in table
+  function createCartRow(id, item) {
+    const tr = document.createElement('tr');
+    tr.appendChild(createImageCell(id, item));
+    tr.appendChild(createTitleCell(id, item));
+    tr.appendChild(createPriceCell(id, item));
+    tr.appendChild(createQtyCell(id, item));
+    tr.appendChild(createDeleteCell(id));
+    return tr;
+  }
+
+  function createImageCell(id, item) {
+    const td = document.createElement('td');
+    td.innerHTML = `<a href='/${id}'><img src='${item.image}' alt='ceramic art' class='cartImage'></a>`;
+    return td;
+  }
+
+function createTitleCell(id, item) {
+    const td = document.createElement('td');
+    td.innerHTML = `<a href='/${id}'>${item.productTitle}</a>`;
+    return td;
+}
+
+function createPriceCell(id, item) {
+    const td = document.createElement('td');
+    const qty = cart[id]['qty'];
+    const originalTotal = item.price * qty;
+    const discountedTotal = (item.price - item.discount) * qty;
+
+    if (item.discount > 0) {
+        const originalDiv = document.createElement('div');
+        originalDiv.textContent = originalTotal.toFixed(2);
+        originalDiv.style.textDecoration = 'line-through';
+        originalDiv.style.color = '#888';
+
+        const discountedDiv = document.createElement('div');
+        discountedDiv.textContent = discountedTotal.toFixed(2);
+        discountedDiv.style.fontWeight = 'bold';
+
+        td.appendChild(originalDiv);
+        td.appendChild(discountedDiv);
+    } else {
+        td.textContent = originalTotal.toFixed(2);
+    }
+
+    return td;
+}
+function createQtyCell(id, item) {
+  const td = document.createElement('td');
+  const select = document.createElement('select');
+  select.name = 'editQTY';
+  select.setAttribute('data-id', id);
+  select.class = 'p-2';
+  select.onchange = function () {
+      editFromCart(this, +this.value);
+  };
+
+  for (let i = 1; i <= item.qty; i++) {
+      const option = document.createElement('option');
+      option.value = i;
+      option.textContent = i;
+      if (i === cart[id]['qty']) {
+        option.selected = true
+      }
+      select.appendChild(option);
+  }
+
+  td.appendChild(select);
+  return td;
+}
+
+function createDeleteCell (id) {
+  let deleteButton = document.createElement("td")
+  deleteButton.innerHTML = `<span data-id="${id}" class ="deleteCart"><i data-id="${id}" class="deleteCart fa fa-times px-2 " aria-hidden="true"></i>Delete</span>`
+  deleteButton.querySelector(".deleteCart").addEventListener("click", deleteFromCart)
+  return deleteButton
+}
+
+//add taxes and shipping
+function appendSummaryRows(tbody) {
+  const tax = sum * 0.07
+  const shipping = 10.00
+  // const discountPercentage = 0.00
+  // const discount = sum * discountPercentage
+  // tbody.appendChild(createSummaryRow(`Discount -${discountPercentage*100}`, discount))
+  tbody.appendChild(createSummaryRow('Taxes 7%', tax))
+  tbody.appendChild(createSummaryRow('Shipping and Handling', shipping))
+}
+
+function createSummaryRow(label, value) {
+  const tr = document.createElement('tr');
+  const spacer = document.createElement('td');
+  const labelTD = document.createElement('td');
+  const valueTD = document.createElement('td');
+
+  labelTD.textContent = label;
+  valueTD.textContent = value.toFixed(2);
+
+  tr.appendChild(spacer);
+  tr.appendChild(labelTD);
+  tr.appendChild(valueTD);
+
+  return tr;
+}
+//update total sum and count
+function updateTotals() {
+  const tax = sum * 0.07
+  const shipping = count > 0 ? 10.00 : 0
+  const discount = sum * 0.00 //added functionality for later?
+  document.getElementById("sum").textContent = (sum + tax + shipping - discount).toFixed(2);
+  document.getElementById("count").textContent = count;
+}
+  //Adds delete buttons in checkout page
+  
+  function deleteFromCart(event) {
+    let productID = event.target.dataset.id
+    delete cart[productID]
     localStorage.setItem("cart", JSON.stringify(cart))
-    window.location.reload()
+    updateCart()
   }
   
   //edits quantity on cart checkout
   function editFromCart(selectObj, value) {
-     let cart = JSON.parse(localStorage.getItem("cart"))
      let productID = selectObj.dataset.id
      for (let id in cart) {
        let item = cart[id]
        if (id == productID) {
-         sum -= item.qty * Number.parseFloat(item.price).toFixed(2)
-         count -= item.qty
          item.qty = value
-         sum += item.qty * Number.parseFloat(item.price).toFixed(2)
-         count += item.qty
        }
      }
-     localStorage.setItem("sum", sum)
-     localStorage.setItem("count", count)
      localStorage.setItem("cart", JSON.stringify(cart))
-     window.location.reload()
+     updateCart()
    }

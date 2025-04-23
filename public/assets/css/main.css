@@ -150,7 +150,6 @@ input::-moz-focus-inner {
 		transition: border-bottom-color 0.25s ease-in-out;
 		color: inherit;
 		text-decoration: none;
-		border-bottom: dotted 1px rgba(0, 0, 0, 0.25);
 	}
 
 		a:hover {
@@ -2664,14 +2663,43 @@ h1, h2, .headerRecentWork {
 	text-align:center;
 	line-height: 2rem;
   }
+  td {
+	vertical-align: middle;
+  }
+  thead {
+	font-weight: 600;
+	border-bottom: solid 1px #888;
+	margin: 0 0 3rem;
+  }
+  tr:first-child td {
+	padding-top: 2rem;
+  }
+  td:nth-child(1) { width: 50%; } /* Image */
+  td:nth-child(2) { width: 20%; } /* Title */
+  td:nth-child(3) { width: 10%; } /* Price */
+  td:nth-child(4) { width: 10%; } /* Qty */
+  td:nth-child(5) { width: 10%; } /* Delete */
+  
   .cartImage {
 	width: 40%;
+  }
+  @media screen and (max-width: 736px){
+	  .cartImage {
+		width: 80%;
+	  }
+  }
+  @media screen and (min-width: 1025px){
+	  .cartImage {
+		width: 25%;
+	  }
+	  table {
+		font-size: 1.3rem;
+	  }
   }
   .cart-icon {
 	font-size: 2rem;
 	transition: .5s ease-in-out;
   }
-
   /* profile styles */
 
   .hidden {
