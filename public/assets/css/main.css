@@ -2655,7 +2655,7 @@ h1, h2, .headerRecentWork {
 	height: 2rem;
   
 	color: #fff;
-	background-color: #f00;
+	background-color: rgb(248, 67, 67);
 	font-family: sans-serif;
 	
 	border-radius: 50%;
@@ -2695,9 +2695,6 @@ h1, h2, .headerRecentWork {
 	  table {
 		font-size: 1.3rem;
 	  }
-  }
-  .optionDisabled {
-	color: red;
   }
   .cart-icon {
 	font-size: 2rem;
