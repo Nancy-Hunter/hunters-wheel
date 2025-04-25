@@ -14,6 +14,29 @@ thumbnails.forEach((thumb) => {
 let cart = JSON.parse(localStorage.getItem("cart")) || {};
 let count = Number(localStorage.getItem("count")) || 0;
 
+//disables quantity options according to stock/cart[qty]
+document.querySelectorAll('.addToCartForm').forEach(form => {
+  const select = form.querySelector('.selectQty')
+  const button = form.querySelector('.cartButton')
+  const id = button.dataset.id
+  const stock = Number(button.dataset.stock)
+  const currentQty = cart[id]?.qty || 0
+  const maxAvailable = stock - currentQty
+
+  Array.from(select.options).forEach(option => {
+    const isDisabled = Number(option.value) > maxAvailable
+    option.disabled = isDisabled
+    option.style.color = isDisabled ? 'white' : 'black' 
+  })
+
+  // Optional: disable add to cart if no quantity available
+  if (maxAvailable <= 0) {
+    button.textContent = 'Max Quantity Reached'
+    button.disabled = true
+    select.disabled = true
+  }
+})
+
 //update Cart in local storage at post.ejs
 
 const addToCartButton = document.querySelectorAll(".cartButton")
@@ -22,17 +45,17 @@ addToCartButton.forEach(function (el) {
   el.addEventListener('click', addToCart)
 })
 function addToCart(event) {
-  let price = Number(event.target.dataset.price)
-  let id = event.target.dataset.id
-  let image = event.target.dataset.img
-  const stock = Number(event.target.dataset.stock)
+  const button = event.target
+  let price = Number(button.dataset.price)
+  let id = button.dataset.id
+  const stock = Number(button.dataset.stock)
   // Find the nearest select inside the same form
-  const form = event.target.closest(".addToCartForm")
+  const form = button.closest(".addToCartForm")
   const select = form.querySelector(".selectQty")
   const qty = Number(select.value)
 
-  const currentQtyInCart = cart[id]?.qty || 0;
-  const newTotalQty = currentQtyInCart + qty;
+  const currentQtyInCart = cart[id]?.qty || 0
+  const newTotalQty = currentQtyInCart + qty
 
   if (newTotalQty > stock) {
     alert(`Only ${stock} in stock. You already have ${currentQtyInCart} in your cart.`);
@@ -44,7 +67,6 @@ function addToCart(event) {
     
   } else {
     cart[id] = {
-        image : image,
         price: price,
         qty: qty
     }
@@ -53,6 +75,18 @@ function addToCart(event) {
 
   localStorage.setItem("cart", JSON.stringify(cart))
   localStorage.setItem("count", count)
+  //disables quantity options according to stock/cart[qty]
+  const maxAvailable = stock - cart[id].qty
+  Array.from(select.options).forEach(option => {
+    const isDisabled = Number(option.value) > maxAvailable
+    option.disabled = isDisabled
+    option.style.color = isDisabled ? 'white' : 'black' 
+  })
+
+  if (maxAvailable <= 0) {
+    button.disabled = true
+    select.disabled = true
+  }
   
   let shoppingCart = document.querySelector('.shopping-cart')
   shoppingCart.classList.add('active');

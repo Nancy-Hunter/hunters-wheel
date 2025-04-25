@@ -2696,6 +2696,9 @@ h1, h2, .headerRecentWork {
 		font-size: 1.3rem;
 	  }
   }
+  .optionDisabled {
+	color: red;
+  }
   .cart-icon {
 	font-size: 2rem;
 	transition: .5s ease-in-out;

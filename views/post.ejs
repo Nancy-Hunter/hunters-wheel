@@ -28,7 +28,7 @@
           <label for="selectQty" class="form-label">Quantity</label>
           <select id="selectQty" name="selectQty" class = 'mx-2 mb-3 selectQty'>
             <% for (let i = 1; i<=post.quantity; i++) { %>
-              <option value="<%= i %>"><%=`${i}`%></option>
+              <option value="<%= i %>"><%= i %></option>
             <% } %>
           </select>
         </div>
@@ -38,7 +38,6 @@
             class="btn btn-outline-success cartButton me-2" 
             data-stock = "<%=post.quantity%>"
             data-id="<%= post._id %>" 
-            data-img="<%= post.mainImageURL %>" 
             data-price="<%= Number.parseFloat(post.price - post.discount).toFixed(2) %>">Add to Cart</button>
           <a href= '/cart' class="btn btn-outline-success">Checkout</a>
         </div>
