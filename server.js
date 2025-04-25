@@ -15,7 +15,7 @@ const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const adminRoutes = require("./routes/admin");
 const stripeRoutes = require("./routes/stripeRoutes");
-
+const multer = require('multer');
 
 
 // Passport config
@@ -61,6 +61,15 @@ app.use(flash());
 app.use("/", mainRoutes);
 app.use("/admin", adminRoutes);
 app.use("/checkout", stripeRoutes)
+
+//multer error
+app.use((err, req, res, next) => {
+  if (err instanceof multer.MulterError || err.message === "File type is not supported") {
+    req.flash("error", err.message);
+    return res.redirect("/admin/profile"); // redirect to profile
+  }
+  next(err); // for other types of errors
+});
 
 //Server Running
 app.listen(process.env.PORT, () => {

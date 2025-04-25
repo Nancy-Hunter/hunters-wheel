@@ -1,9 +1,9 @@
 <%- include('partials/header') -%>
 
-<% if (error && error.length > 0) { %>
-  <div class = "position-fixed top-50 start-50 translate-middle z-3">
+<% if ((error && error.length > 0) || (messages.error && messages.error.length > 0)) { %>
+  <div class="position-fixed top-50 start-50 translate-middle z-3">
     <div class="d-flex alert alert-danger alert-dismissible fade show custom-alert" role="alert">
-      <%= error[0] %>
+      <%= (error && error.length > 0) ? error[0] : messages.error[0] %>
       <button type="button" class="custom-close" data-bs-dismiss="alert" aria-label="Close">x</button>
     </div>
   </div>
