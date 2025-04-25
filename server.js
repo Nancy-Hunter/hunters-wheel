@@ -68,6 +68,8 @@ app.use((err, req, res, next) => {
     req.flash("error", err.message);
     return res.redirect("/admin/profile"); // redirect to profile
   }
+  //sets flash messages
+  res.locals.messages = req.flash();
   next(err); // for other types of errors
 });
 

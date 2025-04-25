@@ -18,9 +18,17 @@ module.exports = {
   //creates document in MongoDB for product 
   createPost: async (req, res) => {
     try {
-      // Upload image to cloudinary
+      // grab images 
       const mainImageFile = req.files["mainImage"]?.[0];
       const galleryFiles = req.files["galleryImages"] || [];
+
+      const { title, caption, price } = req.body;
+
+     // Check for missing required fields
+      if (!title || !price || !caption || !mainImageFile) {
+        req.flash("error", "Please fill out all required fields and upload a main image.");
+        return res.redirect("/admin/profile");
+      }
 
       // Upload main image
       const mainUpload = await cloudinary.uploader.upload(mainImageFile.path);
