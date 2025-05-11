@@ -20,7 +20,15 @@
 					<p class="text-center lead">Clay by Nancy</p>
 				</header>
 			</section>
-
+		<!-- navigation bar -->
+			<nav class="customNav">
+			  <a class = "link" href="/">Home</a>
+			  <a class = "link" href="/category/cups">Cups</a>
+			  <a class = "link" href="/category/bowls">Bowls</a>
+			  <a class = "link" href="/category/plates">Plates</a>
+			  <a class = "link" href="/category/just%20art">Just Art</a>
+			  <a class = "link shopping-cart-nav" href="/cart">Cart</a>
+		    </nav>
 		<!-- First -->
 			<section id="first" class="main">
 				<header>
@@ -34,35 +42,57 @@
 
 		<!-- Second -->
 			<section id="second" class="main">
-				<div class="content dark style2">
+				<div class="content dark style3">
 					<div class="container">
-						<div class="row">
+						
 							<div class="col-12">
 								<h3 class="headerRecentWork">Recent Work</h3>
 							</div>
 							<div class="col-12">
 								<ul class="row">
+									<!-- displayed favorite posts -->
 									<% for(let i=0; i<posts.length; i++) {%>
 									  <!-- Start of list item -->
-									  <li class="col-4 col-6-narrow col-12-mobile" id ="<%= posts[i].id %>" >
-										<a href="/<%= posts[i]._id%>" class="image fit">
-										  <img class="" src="<%= posts[i].mainImageURL%>">
-										</a>
-										<!-- image and anchor -->
-										 <div class="">
-											 <!-- title -->
-											<h6 class=""><%=posts[i].title%></h6>
-										</div>
-									  </li>
+									  <% if (posts[i].available==true) { %>
+										<% if (posts[i].favorite) { %>
+											<li class="col-4 col-6-narrow col-12-mobile" id ="<%= posts[i].id %>" >
+												<a href="/<%= posts[i]._id%>" class="image fit">
+												<img class="" src="<%= posts[i].mainImageURL%>">
+												</a>
+												<!-- image and anchor -->
+												<div class="">
+													<!-- title -->
+													<h6 class=""><%=posts[i].title%></h6>
+												</div>
+											</li>
+										<% } %>
 									  <% } %>
+									<% } %>
+									<!-- non-favorite posts initially hidden -->
+									<% for(let i=0; i<posts.length; i++) {%>
+									  <!-- Start of list item -->
+									  <% if (posts[i].available==true) { %>
+										<!-- displayed favorite posts -->
+										<% if (posts[i].favorite === false) { %>
+											<li class="col-4 col-6-narrow col-12-mobile hidden" id ="<%= posts[i].id %>" >
+												<a href="/<%= posts[i]._id%>" class="image fit">
+												<img class="" src="<%= posts[i].mainImageURL%>">
+												</a>
+												<!-- image and anchor -->
+												<div class="">
+													<!-- title -->
+													<h6 class=""><%=posts[i].title%></h6>
+												</div>
+											</li>
+										<% } %>
+									  <% } %>
+									<% } %>
 								  </ul>
 							</div>
-							
-							
+						<div class="centered">
+							<button class="button scrolly" id = "seeMore">See More</button>
 						</div>
-						<h6>
-							<a href="#third" class="button scrolly">See More</a>
-						</h6>
+						
 					</div>
 				</div>
 			</section>
@@ -120,6 +150,14 @@
 			</section>
 
 		<!-- Scripts -->
+			<script>
+				let productCount = 0;
+				if (localStorage.getItem("count")) {
+					productCount = parseInt(localStorage.getItem("count"));
+				}
+				document.querySelector('.shopping-cart-nav').setAttribute('data-product-count', productCount)
+			</script>
+			<script src="/index.js"></script>
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.scrolly.min.js"></script>
 			<script src="assets/js/browser.min.js"></script>

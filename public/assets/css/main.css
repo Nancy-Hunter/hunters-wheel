@@ -154,6 +154,7 @@ input::-moz-focus-inner {
 
 		a:hover {
 			border-bottom-color: rgba(0, 0, 0, 0);
+			color: black;
 		}
 
 	.dark a {
@@ -2493,8 +2494,9 @@ input::-moz-focus-inner {
 	}
 
 	/* my styles */
-h1, h2, .headerRecentWork {
+h1, h2, .headerRecentWork, button, .centered {
 	font-family: "Marcellus", serif;
+	text-align: center;
 }
 /* navigation bar */
 
@@ -2610,9 +2612,31 @@ h1, h2, .headerRecentWork {
   }
 
 	/* add to cart animation */
-
-.shopping-cart {
+.shopping-cart-nav {
+	position: relative;
+}
+.shopping-cart-nav::before {
 	position: absolute;
+	content: attr(data-product-count);
+  
+	top: -.2rem;
+	right: -.25rem;
+  
+	width: 1.5rem;
+	height: 1.5rem;
+  
+	color: #ffffffe0;
+	background-color: #384a56;
+	font-family: sans-serif;
+	font-size: 1rem;
+	
+	border-radius: 50%;
+	
+	text-align:center;
+	line-height: 1.6rem;
+  }
+.shopping-cart {
+	position: fixed;
 	right: 1rem;
 	bottom: 1rem;
   
@@ -2655,7 +2679,7 @@ h1, h2, .headerRecentWork {
 	height: 2rem;
   
 	color: #fff;
-	background-color: rgb(248, 67, 67);
+	background-color: rgb(153, 0, 255);
 	font-family: sans-serif;
 	
 	border-radius: 50%;
