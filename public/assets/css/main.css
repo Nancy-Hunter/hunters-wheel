@@ -2635,6 +2635,9 @@ h1, h2, .headerRecentWork, button, .centered {
 	text-align:center;
 	line-height: 1.6rem;
   }
+.shopping-cart-nav:not([data-product-count])::before {
+	display: none;
+}
 .shopping-cart {
 	position: fixed;
 	right: 1rem;

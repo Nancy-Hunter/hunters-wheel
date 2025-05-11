@@ -155,7 +155,10 @@
 				if (localStorage.getItem("count")) {
 					productCount = parseInt(localStorage.getItem("count"));
 				}
-				document.querySelector('.shopping-cart-nav').setAttribute('data-product-count', productCount)
+				let navCart = document.querySelector('.shopping-cart-nav')
+				if (productCount > 0) {
+					navCart.setAttribute('data-product-count', productCount);
+				}
 			</script>
 			<script src="/index.js"></script>
 			<script src="assets/js/jquery.min.js"></script>
