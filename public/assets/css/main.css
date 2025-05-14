@@ -82,7 +82,7 @@ input::-moz-focus-inner {
 		background: #F8F8F8;
 		font-family: 'Quicksand', 'Roboto', sans-serif;
 		font-weight: 300;
-		font-size: 10pt;
+		/* font-size: 10pt; */
 		line-height: 1.75em;
 		color: #888;
 		-webkit-text-stroke: 0.1px;
@@ -2729,25 +2729,36 @@ h1, h2, .headerRecentWork, button, .centered {
   }
   /* profile styles */
 
-  .hidden {
+.hidden {
 	display: none;
-  }
-  .iconButton {
+}
+.iconButton {
 	padding: .5rem;
 	font-size: 1rem;
-  }
- .radio {
+}
+.radio {
 	display: inline;
- }
- .centeredButton {
+}
+.centeredButton {
 	margin: 3rem auto;
 	display: block;
- }
- .changeDiscountButton, #availableButton {
+}
+.changeDiscountButton, #availableButton {
 	margin-bottom:.07rem;
 	
- }
- .favorite {
+}
+.favorite {
 	background: #fec708; 
- }
- 
+}
+
+/* payment success page */
+
+.checkout-message {
+	 padding: 3rem;
+	 font-size: 2rem;
+	 color: black;
+}
+.checkout-message p {
+	text-align: center;	
+	line-height: 2.2rem;	
+}

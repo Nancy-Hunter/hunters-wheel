@@ -210,3 +210,26 @@ function updateTotals() {
      localStorage.setItem("cart", JSON.stringify(cart))
      updateCart()
    }
+
+
+   //CHECKOUT BUTTON reroutes to stripe controller
+   document.getElementById('checkout-button').addEventListener('click', async function (e) {
+    e.preventDefault();
+
+    const cart = JSON.parse(localStorage.getItem('cart') || '{}');
+
+    const response = await fetch('/checkout/create-checkout-session', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ cart })
+    });
+
+    if (response.ok) {
+      const session = await response.json();
+      window.location.href = session.url;
+    } else {
+      alert('Something went wrong during checkout.');
+    }
+  })
