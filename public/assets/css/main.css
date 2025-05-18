@@ -236,11 +236,53 @@ h1, h2, h3, button {
 .icons a:hover {
     background: rgba(0, 0, 0, 0.025);
 }
+
+/* category styles */
+.categoryTitle {
+    font-size: 2rem;
+    padding: 3rem 0;
+}
+.categoryContainer {
+    display: flex;
+    padding-bottom: 2rem;
+    gap: .5rem;
+    padding: 0 1rem;
+}
+.categoryCard {
+    width:50%;
+    padding: 0 ;
+}
+.categoryImg {
+    object-fit: contain;
+    width:100%;   
+}
+.prodTitle {
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding: .5rem 0;
+}
+@media (min-width: 900px) {
+    .categoryCard {
+        width:33%;
+    }
+}
+@media (min-width: 1200px) { 
+    .categoryContainer {
+        padding: 0 8rem 2rem;
+    }
+}
+@media (min-width: 1600px) { 
+    .categoryContainer {
+        padding: 0 15rem 2rem;
+    }
+}
+
 /* post styles */
 
 .postTitle {
     text-align: start;
     font-size: 2.3rem;
+    padding: .3rem 0 1rem 3rem;
 }
 .postInfo {
     font-size: 1.4rem;
