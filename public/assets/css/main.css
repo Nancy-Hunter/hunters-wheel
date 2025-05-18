@@ -84,23 +84,158 @@ h1, h2, h3, button {
 }
 /* tagline */
 .tagline {
-    padding: 4.5rem;
+    padding: 7rem 4.5rem;
     font-size: 2.3rem;
 }
 /* recent work */
-.productCard {
-    width: 50%;
-    display: inline-block;
-    position: bottom;
-}
-.frontpageImg {
-    width: 100%;
-}
 .secondHeader {
     padding: 0 0 1rem 0;
 }
+.productCard {
+    display: inline-block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    break-inside: avoid;
+    cursor: pointer;
+    overflow: hidden;
+}
+.productCard:hover .frontpageImg {
+    transform: scale(1.2); 
+}
+.frontpageImg {
+    transition: transform 7s ease;
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0;
+}
+.imageGrid {
+    column-count: 2;
+    column-gap: 0;
+    padding: 0;
+    margin: 0;
+}
+.seeMoreButton {
+    margin-top: 2rem;
+    overflow: hidden;
+    padding: .6rem 1.5rem;
+	font-size: 1rem;
+	position: relative;
+	border: 2px solid black;
+    border-radius: 16px;
+	color: black;
+	background-color: transparent;
+	text-align: center;
+}
+.seeMoreButton {
+    span {
+        position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		padding: .6rem 1.5rem;
+		opacity: 0;
+		color: white;
+		transition: 0.35s ease;
+	}
+    &::before {
+        
+		content: "";
+		left: 0;
+		top: 0;
+		position: absolute;
+		width: 0;
+		height: 100%;
+		background-color: black;
+		transition: 0.5s ease;
+	}
 
+	&:hover {
+		&:before {
+			width: 100%;
+		}
 
+		span {
+			opacity: 1;
+		}
+	}
+}
+@media (min-width: 768px) {
+    .imageGrid {
+        column-count: 3;
+    }
+}
+
+/* about section */
+.aboutSection {
+    padding: 5rem 0;
+    line-height: 1.3rem;
+}
+.aboutSection h2 {
+    padding: 3rem 0;
+    font-size: 1.8rem;
+}
+.aboutContainer {
+    display: flex;
+}
+.aboutContainer img {
+    width: 50%;
+    object-fit: contain;
+}
+.aboutBlurb {
+    font-size: 1.2rem;
+    padding: 5rem 4rem;
+}
+.name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    padding-bottom: 2rem;
+}
+@media (max-width: 700px) {
+    .aboutContainer {
+        flex-direction: column;
+        align-items: center;
+    }
+    .aboutBlurb {
+        padding: 0 4rem 4rem;
+    }
+}
+@media (min-width: 1200px) {
+    .aboutContainer img {
+        width: 30%;
+        margin: 2rem 3rem 0 0;
+    }
+    .aboutBlurb {
+        padding: 6rem 13rem;
+    }
+}
+
+/* footer */
+.icons {
+    display: flex;
+    justify-content: center;
+}
+.icons li {
+    margin: 1rem;
+}
+.icons a{
+    transition: background-color 0.25s ease-in-out;
+    display: inline-block;
+    width: 2.75em;
+    height: 2.75em;
+    line-height: 2.8em;
+    text-align: center;
+    border: 0;
+    box-shadow: inset 0 0 0 1px #cccccc; 
+    /* outline of icon */
+    border-radius: 100%;
+    color: #aaa;
+}
+.icons a:hover {
+    background: rgba(0, 0, 0, 0.025);
+}
 /* post styles */
 
 .postTitle {

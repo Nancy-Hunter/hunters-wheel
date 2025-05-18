@@ -8,6 +8,7 @@
 		<link rel="stylesheet" href="assets/css/Eric Meyers Reset.css" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico"/>
+		<script src="https://kit.fontawesome.com/42df4c29ec.js" crossorigin="anonymous"></script>
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
@@ -43,21 +44,18 @@
 <!-- Second -->
 	<section class="">
 		<h3 class="centered secondHeader">My Work</h3>
-		<ul class="">
+		<ul class="imageGrid">
 			<!-- displayed favorite posts -->
 			<% for(let i=0; i<posts.length; i++) {%>
 				<!-- Start of list item -->
 				<% if (posts[i].available==true) { %>
 				<% if (posts[i].favorite) { %>
 					<li class="productCard" id ="<%= posts[i].id %>" >
-						<a href="/<%= posts[i]._id%>" class="image fit">
+						<a href="/<%= posts[i]._id%>" class="">
 						<img class="frontpageImg" src="<%= posts[i].mainImageURL%>">
 						</a>
 						<!-- image and anchor -->
-						<div class="">
-							<!-- title -->
-							<h6 class=""><%=posts[i].title%></h6>
-						</div>
+						
 					</li>
 				<% } %>
 				<% } %>
@@ -69,38 +67,42 @@
 				<!-- displayed favorite posts -->
 				<% if (posts[i].favorite === false) { %>
 					<li class="productCard hidden" id ="<%= posts[i].id %>" >
-						<a href="/<%= posts[i]._id%>" class="image fit">
+						<a href="/<%= posts[i]._id%>" class="">
 						<img class="frontpageImg" src="<%= posts[i].mainImageURL%>">
 						</a>
 						<!-- image and anchor -->
-						<div class="">
-							<!-- title -->
-							<h6 class=""><%=posts[i].title%></h6>
-						</div>
+						
 					</li>
 				<% } %>
 				<% } %>
 			<% } %>
 		</ul>			
 		<div class="centered">
-			<button class="button" id = "seeMore">See More</button>
+			<button class="seeMoreButton">See More<span>See More</span></button>
 		</div>
 	</section>
 
 <!-- Third -->
-	<section class="centered">
+	<section class="centered aboutSection">
 		<h2 class="">About the Artist</h2>
-		<p>Look at me. Don't look at me!</p>
-		<p>Art doesn't have to be confined to the walls never to be touched. It can be in anything and everywhere. Surround yourself with the beauty of human creativity. And please throw away that corporate slip-cast mug from some conference in 2017. You deserve more.</p>
-		<p>Don't ever save anything for a special occasion. Being alive is a special occasion -Mary Engelbreit</p>
+		<div class="aboutContainer">
+			<div class="aboutBlurb">
+				<p class="name">Nancy Hunter</p>
+				<p>Art doesn't have to be confined to the walls never to be touched. It can be in anything and everywhere. Surround yourself with the beauty of human creativity. And please throw away that corporate slip-cast mug from some conference in 2017. You deserve more.
+				<br>
+				<br>
+				"Don't ever save anything for a special occasion. Being alive is a special occasion" -Mary Engelbreit</p>
+			</div>
+			<img src="/images/profile-picture.jpg" alt="">
+		</div>
 	</section>
 
 <!-- Footer -->
 	<section class="footer">
 		<ul class="icons">
-			<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-			<li><a href="#" class="icon brands fa-linkedin"><span class="label">Twitter</span></a></li>				
-			<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+			<li><a href="#" class=""><i class="fa-brands fa-instagram"></i></a></li>
+			<li><a href="#" class=""><i class="fa-brands fa-linkedin"></i></a></li>				
+			<li><a href="#" class=""><i class="fa-brands fa-github"></i></a></li>
 		</ul>
 	</section>
 
