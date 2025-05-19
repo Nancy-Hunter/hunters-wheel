@@ -10,4 +10,12 @@ module.exports = {
       console.log(err);
     }
   },
+  getAbout: async (req, res) => {
+    try {
+      const posts = await Post.find().sort({  createdAt: "desc" })
+      res.render("about.ejs", { posts: posts });
+    } catch (err) {
+      console.log(err);
+    }
+  },
 };

@@ -1,0 +1,31 @@
+
+<%- include('partials/header') -%>
+ 
+<section class="centered aboutSection">
+    <h2 class="">About the Artist</h2>
+    <div class="aboutContainer">
+        <div class="aboutBlurb">
+            <p class="name">Nancy Hunter</p>
+            <p>Art doesn't have to be confined to the walls never to be touched. It can be in anything and everywhere. Surround yourself with the beauty of human creativity. And please throw away that corporate slip-cast mug from some conference in 2017. You deserve more.
+            <br>
+            <br>
+            "Don't ever save anything for a special occasion. Being alive is a special occasion" -Mary Engelbreit</p>
+        </div>
+        <img src="/images/profile-picture.jpg" alt="">
+    </div>
+</section>
+  
+  <a href="/cart" class="shopping-cart" data-product-count= '0'>
+    <span class="cart-icon">&#128722;</span>
+  </a>
+  <script>
+    let productCount = 0;
+    if (localStorage.getItem("count")) {
+      productCount = parseInt(localStorage.getItem("count"));
+    }
+    document.querySelector('.shopping-cart').setAttribute('data-product-count', productCount)
+  </script>
+<script src="/header.js"></script>
+
+</body>
+</html>

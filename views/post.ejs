@@ -1,52 +1,51 @@
 <%- include('partials/header') -%>
 
-  <div class="container postContainer">
+<h2 class="postTitle"><%= post.title %></h2>
+  <div class="postContainer centered">
     <div class="IMAGES">
-      <h2 class="postTitle"><%= post.title %></h2>
-      <div class="mainImageContainer">
-        <img class="img-fluid mainImage" id ="leadImage" src="<%= post.mainImageURL%>" />
-        <% if (post.galleryImages.length>0) { %>
-          <div class="galleryContainer">
-            <% for(let i = 0; i < post.galleryImages.length; i++) { %>
-              <img class="gallery" src = "<%= post.galleryImages[i]['url'] %>">
-            <% } %>
-          </div>
-        <% } %>
-        <a class="btn btn-outline-success my-4" href="/category/<%= post.category %>">Keep Looking</a>
-      </div>
+      <img class="mainImage" id ="leadImage" src="<%= post.mainImageURL%>" />
+      <% if (post.galleryImages.length>0) { %>
+        <div class="galleryContainer">
+          <% for(let i = 0; i < post.galleryImages.length; i++) { %>
+            <img class="gallery" src = "<%= post.galleryImages[i]['url'] %>">
+          <% } %>
+        </div>
+      <% } %>
     </div>
-    <div class="postInfo">
-      <p class=""><%= post.caption %></p>
+    <div class="postInfo price"> 
+      <p class="caption"><%= post.caption %></p>
+
       <% if (post.onSale==true) { %>
         <p class=""><s>$<%= Number.parseFloat(post.price).toFixed(2) %></s></p> 
-        <p class="text-success">On Sale $<%= Number.parseFloat(post.price - post.discount).toFixed(2) %></p>                   
+        <p class="">On Sale $<%= Number.parseFloat(post.price - post.discount).toFixed(2) %></p>                   
       <% } else { %>
         <p class="">$<%= Number.parseFloat(post.price).toFixed(2) %></p> 
       <% } %>
-      <form class="addToCartForm">
-        <div class="d-flex">
-          <label for="selectQty" class="form-label">Quantity</label>
-          <select id="selectQty" name="selectQty" class = 'mx-2 mb-3 selectQty'>
-            <% for (let i = 1; i<=post.quantity; i++) { %>
-              <option value="<%= i %>"><%= i %></option>
-            <% } %>
-          </select>
-        </div>
-        <div class="d-flex">
+          
+      <div class="addToCartForm">
+        <label for="selectQty" class="quantityLabel">Quantity</label>
+        <select id="selectQty" name="selectQty" class = 'selectQty'>
+          <% for (let i = 1; i<=post.quantity; i++) { %>
+            <option value="<%= i %>"><%= i %></option>
+          <% } %>
+        </select>
+
+        <div class="buttonContainer">
           <button 
-            type='button' 
-            class="btn btn-outline-success cartButton me-2" 
-            data-stock = "<%=post.quantity%>"
-            data-id="<%= post._id %>" 
-            data-price="<%= Number.parseFloat(post.price - post.discount).toFixed(2) %>">Add to Cart</button>
-          <a href= '/cart' class="btn btn-outline-success">Checkout</a>
+          type='button' 
+          class="cartButton ghostButton" 
+          data-stock = "<%=post.quantity%>"
+          data-id="<%= post._id %>" 
+          data-price="<%= Number.parseFloat(post.price - post.discount).toFixed(2) %>">Add to Cart<span>Add to Cart</span></button>
+          <a href= '/cart' class="ghostButton checkout">Checkout<span>Checkout</span></a>
         </div>
-      </form>
+
+        <a class="keepLooking ghostButton" href="/category/<%= post.category %>">Keep Looking<span>Keep Looking</span></a>
+      </div>
     </div>
-    <a href="/cart" class="shopping-cart" data-product-count= '0'>
-      <span class="cart-icon">&#128722;</span>
-    </a>
-  </div>
+      <a href="/cart" class="shopping-cart" data-product-count= '0'>
+        <span class="cart-icon">&#128722;</span>
+      </a>
 </body>
 <script>
   let productCount = 0;
@@ -58,5 +57,5 @@
 
 <script src="/post.js"></script>
 <script src="/header.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+
 </html>

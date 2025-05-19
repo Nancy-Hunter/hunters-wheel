@@ -5,6 +5,7 @@ const postsController = require("../controllers/posts");
 
 //Main Routes - simplified for now
 router.get("/", homeController.getIndex)
+router.get("/about", homeController.getAbout)
 router.get("/category/:theme", postsController.getCategory)
 router.get("/cart", postsController.getCart)
 router.get("/deals", postsController.getDeals)
