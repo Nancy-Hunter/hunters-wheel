@@ -5,10 +5,88 @@
     text-decoration: none;
     color: darkslategray;
     background-color: whitesmoke;
-}
-a, p {
     font-family: 'Quicksand', sans-serif;
 }
+h1, h2, h3, button, .checkout {
+    font-family: "Marcellus", serif;
+}
+.centered {
+    text-align: center;
+}
+a, p {
+    text-decoration: none;
+    font-family: 'Quicksand', sans-serif;
+}
+/* buttons */
+.zoomButton {
+    border-radius: 16px;
+    border: 1.5px solid darkslategray;
+    padding: 0.3rem 1.5rem;
+    color: darkslategray;
+    display: inline-block;
+    overflow: hidden; /* Prevents scale overflow */
+}
+.zoomButton:hover {
+    color: rgb(153, 0, 255);
+}
+/* text needs to be nested in span to have text transition larger without enlarging/growing the whole button  */
+.zoomButton span {
+    display: inline-block;
+    transition: transform 0.4s ease-out, color 0.3s ease-out;
+    transform-origin: center;
+    font-size: 1rem;
+}
+.zoomButton:hover span {
+    transform: scale(1.1);
+    color: black;
+}
+
+.ghostButton {
+    overflow: hidden;
+    padding: .6rem 1.5rem;
+	font-size: 1rem;
+	position: relative;
+	border: 2px solid black;
+    border-radius: 16px;
+	color: black;
+	background-color: transparent;
+	text-align: center;
+}
+.ghostButton {
+    span {
+        position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		padding: .6rem 1.5rem;
+		opacity: 0;
+		color: white;
+		transition: 0.35s ease;
+        background-color: black;
+	}
+    &::before {
+		content: "";
+		left: 0;
+		top: 0;
+		position: absolute;
+		width: 0;
+		height: 100%;
+		background-color: black;
+		transition: 0.5s ease;
+	}
+
+	&:hover {
+		&:before {
+			width: 100%;
+		}
+
+		span {
+			opacity: 1;
+		}
+	}
+}
+/* header  */
 .heroImgFrontPage {
     width: 100%;
     height: 20rem;
@@ -30,12 +108,6 @@ header, .customNav {
     justify-content: space-between;
     align-items: center;
 }
-h1, h2, h3, button, .checkout {
-    font-family: "Marcellus", serif;
-}
-.centered {
-    text-align: center;
-}
 /* navigation bar */
 .title {
     font-size: 2rem;
@@ -43,7 +115,7 @@ h1, h2, h3, button, .checkout {
     line-height: 2.1rem;
 }
 #dropdownButton {
-    background: white;
+    background: whitesmoke;
     font-family: 'Quicksand', sans-serif;
     font-size: 1rem;
 }
@@ -124,52 +196,7 @@ h1, h2, h3, button, .checkout {
     margin: 0;
 }
 .seeMoreButton {
-    margin-top: 2rem;
-}
-.ghostButton {
-    overflow: hidden;
-    padding: .6rem 1.5rem;
-	font-size: 1rem;
-	position: relative;
-	border: 2px solid black;
-    border-radius: 16px;
-	color: black;
-	background-color: transparent;
-	text-align: center;
-}
-.ghostButton {
-    span {
-        position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		padding: .6rem 1.5rem;
-		opacity: 0;
-		color: white;
-		transition: 0.35s ease;
-        background-color: black;
-	}
-    &::before {
-		content: "";
-		left: 0;
-		top: 0;
-		position: absolute;
-		width: 0;
-		height: 100%;
-		background-color: black;
-		transition: 0.5s ease;
-	}
-
-	&:hover {
-		&:before {
-			width: 100%;
-		}
-
-		span {
-			opacity: 1;
-		}
-	}
+    margin: 2rem auto;
 }
 @media (min-width: 768px) {
     .imageGrid {
@@ -361,25 +388,11 @@ h1, h2, h3, button, .checkout {
     width: 70%;
 }
 
-
-
-
-
-
 /* mobile media queries for post page */
 
 @media screen and (min-width: 736px) {
     .postContainer {
         flex-direction: row;
-    }
-    .IMAGES {
-        
-    }
-    .postInfo {
-    
-    }
-    .mainImage {
-        
     }
 }
 
@@ -519,30 +532,79 @@ h1, h2, h3, button, .checkout {
     font-size: 2rem;
     transition: .5s ease-in-out;
     }
+
     /* profile styles */
 
 .hidden {
     display: none;
 }
-.iconButton {
-    padding: .5rem;
+#category {
+    font-family: 'Quicksand', sans-serif;
+    border-radius: 8px;
+    border: 1px solid;
+    padding: .2rem 1.7rem;
+}
+#category option {
     font-size: 1rem;
 }
 .radio {
     display: inline;
 }
-.centeredButton {
-    margin: 3rem auto;
-    display: block;
+.productContainer, .addProductContainer, .productDiv {
+    width: 50%;
 }
-.changeDiscountButton, #availableButton {
-    margin-bottom:.07rem;
-    
+.favoriteTrash {
+    background-color: transparent;
+    display: flex;
+    justify-content: end;
+    align-content: center;
+    position: relative;
+    bottom: 1.5rem;
+}
+.favoriteTrash form {
+    background-color: transparent;
+}
+.iconButton {
+    font-size: 1rem;
+    border: 1px solid grey;
+}
+.buttonContainerProfile {
+    position: relative;
+    bottom: 1.4rem;
+}
+.buttonContainerProfile .btn {
+    width: 100%;
+    padding: 0;
 }
 .favorite {
     background: #fec708; 
 }
-
+.profileReturn {
+    width: 15%;
+    margin: 2rem auto;
+}
+@media screen and (min-width: 1250px) {
+    .productContainer {
+        width: 33%;
+    }
+    .productDiv {
+        width: 60%;
+    }
+    .addProductContainer {
+        width: 40%;
+    }
+}
+@media screen and (min-width: 1550px) {
+    .productContainer {
+        width: 25%;
+    }
+    .productDiv {
+        width: 62%;
+    }
+    .addProductContainer {
+        width: 33%;
+    }
+}
 /* payment success page */
 
 .checkout-message {
@@ -553,4 +615,29 @@ h1, h2, h3, button, .checkout {
 .checkout-message p {
     text-align: center;	
     line-height: 2.2rem;	
+}
+
+/* login styles */
+.loginContainer {
+    margin: 4rem auto;
+    line-height: 1.5rem;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.1rem;
+}
+.loginContainer button {
+    margin: 1rem auto;
+    font-size: 1rem;
+    border: 1px solid;
+    border-radius: 5px;
+    padding: .3rem 1rem;
+}
+.loginContainer input {
+    margin-top: .5rem;
+    padding: .3rem;
+    border: 1px solid;
+    border-radius: 5px;
+}
+.forgotPassword {
+    display: block;
+    margin-top: 2rem;
 }

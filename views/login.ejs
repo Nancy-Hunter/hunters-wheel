@@ -1,22 +1,23 @@
 <%- include('partials/header') -%>
 
-    <main class="container">
-      <div class="row justify-content-center">
-        <section class="col-6 mt-5">
+    
+      
+        <section class="loginContainer">
           <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
           <div class="alert alert-danger"><%= el.msg %></div>
           <% }) %> <% } %> <% if (locals.messages.info) { %> <%
           messages.info.forEach( el => { %>
           <div class="alert alert-info"><%= el.msg %></div>
           <% }) %> <% } %>
-          <form action="/admin/login" method="POST">
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label"
+
+          <form action="/admin/login" method="POST" class="centered">
+            <div class="">
+              <label for="exampleInputEmail1" class=""
                 >Email address</label
               >
               <input
                 type="email"
-                class="form-control"
+                class=""
                 id="exampleInputEmail1"
                 aria-describedby="emailHelp"
                 name="email"
@@ -26,16 +27,16 @@
               <label for="exampleInputPassword1" class="">Password</label>
               <input
                 type="password"
-                class="form-control"
+                class=""
                 id="exampleInputPassword1"
                 name="password"
               />
             </div>
             <button type="submit" class="">Submit</button>
-            <a href="/admin/resetPassword" class="">forgot password?</a>
+            <a href="/admin/resetPassword" class="forgotPassword">forgot password?</a>
           </form>
         </section>
-      </div>
-    </main>
+      
+   
 
     <%- include('partials/footer') -%>
