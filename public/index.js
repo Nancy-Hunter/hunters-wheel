@@ -1,9 +1,11 @@
-const seeMoreButton = document.getElementById("seeMore")
-const seeMoreTargets = document.getElementsByClassName("hidden")
-seeMoreButton.addEventListener('click', removeHidden)
+document.addEventListener("DOMContentLoaded", function () {
+  const seeMoreButton = document.querySelector(".seeMoreButton")
+  const seeMoreTargets = document.getElementsByClassName("hidden")
 
-function removeHidden() {
-    [...seeMoreTargets].forEach(el=> el.classList.remove('hidden'))
-    seeMoreButton.style.display = "none"
-}
-
+  if (seeMoreButton) {
+    seeMoreButton.addEventListener('click', function () {
+      [...seeMoreTargets].forEach(el => el.classList.remove('hidden'))
+      this.style.display = "none"
+    })
+  }
+})

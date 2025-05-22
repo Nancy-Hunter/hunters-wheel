@@ -21,6 +21,9 @@ const PostSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  dimensions: {
+    type: String,
+  },
   price: {
     type: Number,
     require: true,

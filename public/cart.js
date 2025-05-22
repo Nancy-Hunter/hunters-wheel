@@ -55,7 +55,7 @@ async function updateCart() {
     document.getElementById("tbody").appendChild(tr);
   }
 
-  //fetch for verified cart
+  //fetch for verified cart 
   async function fetchVerifiedCart() {
     const response = await fetch('/verify', {
         method: 'POST',
@@ -70,7 +70,8 @@ async function updateCart() {
         if (!verifiedCart.hasOwnProperty(id)) {
             delete cart[id];
             alert('An item in your cart is no longer available and has been removed.');
-        }
+            continue
+          }
         if (cart[id]['qty']>verifiedCart[id]['qty']) {
             cart[id]['qty'] = verifiedCart[id]['qty']
             // alert(`Sorry, quantity of ${cart[id]['productTitle']} was updated due to lack of stock`)
@@ -129,7 +130,7 @@ function createQtyCell(id, item) {
   const select = document.createElement('select');
   select.name = 'editQTY';
   select.setAttribute('data-id', id);
-  select.class = 'p-2';
+  select.className = 'cartQty';
   select.onchange = function () {
       editFromCart(this, +this.value);
   };
@@ -150,7 +151,7 @@ function createQtyCell(id, item) {
 
 function createDeleteCell (id) {
   let deleteButton = document.createElement("td")
-  deleteButton.innerHTML = `<span data-id="${id}" class ="deleteCart"><i data-id="${id}" class="deleteCart fa fa-times px-2 " aria-hidden="true"></i>Delete</span>`
+  deleteButton.innerHTML = `<span data-id="${id}" class ="deleteCart"><i data-id="${id}" class="deleteCart fa fa-times" aria-hidden="true"></i>Delete</span>`
   deleteButton.querySelector(".deleteCart").addEventListener("click", deleteFromCart)
   return deleteButton
 }

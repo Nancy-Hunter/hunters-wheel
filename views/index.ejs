@@ -45,41 +45,42 @@
 <!-- Second -->
 	<section class="">
 		<h3 class="centered secondHeader">My Work</h3>
-		<ul class="imageGrid">
+		<ol class="imageGrid">
 			<!-- displayed favorite posts -->
 			<% for(let i=0; i<posts.length; i++) {%>
-				<!-- Start of list item -->
+				<!-- Start of list item round1-->
 				<% if (posts[i].available==true) { %>
-				<% if (posts[i].favorite) { %>
-					<li class="productCard" id ="<%= posts[i].id %>" >
-						<a href="/<%= posts[i]._id%>" class="">
-						<img class="frontpageImg" src="<%= posts[i].mainImageURL%>">
-						</a>
-						<!-- image and anchor -->
-						
-					</li>
-				<% } %>
+					<% if (posts[i].favorite) { %>
+						<li class="productCard" id ="<%= posts[i].id %>" >
+							<a href="/<%= posts[i]._id%>" class="">
+							<img class="frontpageImg" src="<%= posts[i].mainImageURL%>">
+							</a>
+							<!-- image and anchor -->
+						</li>
+					<% } %>
 				<% } %>
 			<% } %>
+		</ol>	
+		<ol class="imageGrid">
 			<!-- non-favorite posts initially hidden -->
 			<% for(let i=0; i<posts.length; i++) {%>
-				<!-- Start of list item -->
+				<!-- Start of list item round2-->
 				<% if (posts[i].available==true) { %>
 				<!-- displayed favorite posts -->
-				<% if (posts[i].favorite === false) { %>
-					<li class="productCard hidden" id ="<%= posts[i].id %>" >
-						<a href="/<%= posts[i]._id%>" class="">
-						<img class="frontpageImg" src="<%= posts[i].mainImageURL%>">
-						</a>
-						<!-- image and anchor -->
-						
-					</li>
-				<% } %>
+					<% if (posts[i].favorite === false) { %>
+						<li class="productCard hidden" id ="<%= posts[i].id %>" >
+							<a href="/<%= posts[i]._id%>" class="">
+							<img class="frontpageImg" src="<%= posts[i].mainImageURL%>">
+							</a>
+							<!-- image and anchor -->
+							
+						</li>
+					<% } %>
 				<% } %>
 			<% } %>
-		</ul>			
+		</ol>		
 		<div class="centered">
-			<button class="seeMoreButton ghostButton">See More<span>See More</span></button>
+			<button class="seeMoreButton ghostButton">See More<span class="">See More</span></button>
 		</div>
 	</section>
 

@@ -59,6 +59,7 @@ module.exports = {
         mainImageURL: mainUpload.secure_url,
         mainImageID: mainUpload.public_id,
         caption: req.body.caption,
+        dimensions: req.body.dimensions,
         cartCount: 0,
         price: req.body.price,
         quantity: req.body.quantity,
@@ -127,6 +128,7 @@ module.exports = {
       post.caption = req.body.caption;
       post.price = req.body.price;
       post.category = req.body.category;
+      post.dimensions = req.body.dimensions
       
       await post.save();
       console.log("Post updated!");

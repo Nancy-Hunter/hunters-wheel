@@ -15,16 +15,17 @@
     </div>
 </section>
   
-  <a href="/cart" class="shopping-cart" data-product-count= '0'>
-    <span class="cart-icon">&#128722;</span>
-  </a>
+ 
   <script>
-    let productCount = 0;
-    if (localStorage.getItem("count")) {
-      productCount = parseInt(localStorage.getItem("count"));
-    }
-    document.querySelector('.shopping-cart').setAttribute('data-product-count', productCount)
-  </script>
+		let productCount = 0;
+		if (localStorage.getItem("count")) {
+			productCount = parseInt(localStorage.getItem("count"));
+		}
+		let navCart = document.querySelector('.shopping-cart-nav')
+		if (productCount > 0) {
+			navCart.setAttribute('data-product-count', productCount);
+		}
+	</script>
 <script src="/header.js"></script>
 
 </body>

@@ -29,13 +29,15 @@ document.querySelectorAll('.addToCartForm').forEach(form => {
     option.style.color = isDisabled ? 'white' : 'black' 
   })
 
-  // Optional: disable add to cart if no quantity available
+  // disable add to cart if no quantity available
   if (maxAvailable <= 0) {
-    button.textContent = 'Max Quantity Reached'
+    // below span doesnt work because button.textContent overrides all text in element including the span
+    // button.querySelector('span').textContent = 'Max Quantity Reached'
+    button.textContent = 'All in Cart'
     button.disabled = true
     select.disabled = true
   }
-})
+}) 
 
 //update Cart in local storage at post.ejs
 
@@ -45,7 +47,8 @@ addToCartButton.forEach(function (el) {
   el.addEventListener('click', addToCart)
 })
 function addToCart(event) {
-  const button = event.target
+  // can't use const button = event.target because the ghostButton styling has a span inside. When the span is clicked the dataset in the button isn't attached
+  const button = event.target.closest('button')
   let price = Number(button.dataset.price)
   let id = button.dataset.id
   const stock = Number(button.dataset.stock)
@@ -53,7 +56,7 @@ function addToCart(event) {
   const form = button.closest(".addToCartForm")
   const select = form.querySelector(".selectQty")
   const qty = Number(select.value)
-
+  console.log(id, price)
   const currentQtyInCart = cart[id]?.qty || 0
   const newTotalQty = currentQtyInCart + qty
 
