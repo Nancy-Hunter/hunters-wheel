@@ -174,10 +174,8 @@ header, .customNav {
     padding: 0 0 1rem 0;
 }
 .productCard {
-    display: inline-block;
+    transition: transform 0.3s ease;
     width: 100%;
-    margin: 0;
-    padding: 0;
     cursor: pointer;
     overflow: hidden;
 }
@@ -187,13 +185,13 @@ header, .customNav {
 .frontpageImg {
     transition: transform 7s ease;
     width: 100%;
-    height: auto;
     display: block;
     margin: 0;
 }
 .imageGrid {
-    column-count: 2;
-    column-gap: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 0;
     padding: 0;
     margin: 0;
 }

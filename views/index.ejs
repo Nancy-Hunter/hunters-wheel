@@ -50,35 +50,18 @@
 			<% for(let i=0; i<posts.length; i++) {%>
 				<!-- Start of list item round1-->
 				<% if (posts[i].available==true) { %>
-					<% if (posts[i].favorite) { %>
-						<li class="productCard" id ="<%= posts[i].id %>" >
+	
+						<li class="productCard <%= i >= 6 ? 'hidden' : '' %>" id ="<%= posts[i].id %>" >
 							<a href="/<%= posts[i]._id%>" class="">
 							<img class="frontpageImg" src="<%= posts[i].mainImageURL%>">
 							</a>
 							<!-- image and anchor -->
 						</li>
-					<% } %>
+					
 				<% } %>
 			<% } %>
 		</ol>	
-		<ol class="imageGrid">
-			<!-- non-favorite posts initially hidden -->
-			<% for(let i=0; i<posts.length; i++) {%>
-				<!-- Start of list item round2-->
-				<% if (posts[i].available==true) { %>
-				<!-- displayed favorite posts -->
-					<% if (posts[i].favorite === false) { %>
-						<li class="productCard hidden" id ="<%= posts[i].id %>" >
-							<a href="/<%= posts[i]._id%>" class="">
-							<img class="frontpageImg" src="<%= posts[i].mainImageURL%>">
-							</a>
-							<!-- image and anchor -->
-							
-						</li>
-					<% } %>
-				<% } %>
-			<% } %>
-		</ol>		
+				
 		<div class="centered">
 			<button class="seeMoreButton ghostButton">See More<span class="">See More</span></button>
 		</div>
