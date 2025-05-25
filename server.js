@@ -72,7 +72,18 @@ app.use((err, req, res, next) => {
   res.locals.messages = req.flash();
   next(err); // for other types of errors
 });
-
+//404, castErrors, and server errors
+app.use((err, req, res, next) => {
+  console.log('Caught error:')
+  if (err.name === "CastError") {
+    return res.status(404).render("404", { title: "Not Found", message: "Invalid ID" });
+  }
+  console.error(err);
+  res.status(500).render("500", { title: "Server Error" });
+});
+app.use((req, res, next) => {
+  res.status(404).render("404", { title: "Page Not Found" });
+});
 //Server Running
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on ${process.env.PORT}`);

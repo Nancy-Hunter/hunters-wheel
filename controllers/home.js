@@ -12,7 +12,7 @@ module.exports = {
   },
   getAbout: async (req, res) => {
     try {
-      const posts = await Post.find().sort({  createdAt: "desc" })
+      const posts = await Post.find().sort({  favorite: -1 })
       res.render("about.ejs", { posts: posts });
     } catch (err) {
       console.log(err);

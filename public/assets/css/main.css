@@ -683,7 +683,17 @@ select option {
     display: block;
     margin-top: 2rem;
 }
-
+/* error pages */
+.error {
+    font-size: 1.5rem;
+    padding: 2rem;
+}
+.error h1 {
+    padding: 1rem;
+}
+.error p {
+    padding: 1rem;
+}
 /* add to cart animation */
 .shopping-cart-nav {
     position: relative;

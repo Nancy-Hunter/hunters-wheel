@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 module.exports = {
   getCategory: async (req, res) => {
     try {
-      const posts = await Post.find({ category: req.params.theme });
+      const posts = await Post.find({ category: req.params.theme }).sort({ favorite: -1 });
       res.render("category.ejs", { posts: posts });
     } catch (err) {
       console.log(err);
@@ -13,23 +13,27 @@ module.exports = {
   },
   getDeals: async (req, res) => {
     try {
-      const posts = await Post.find().sort({ createdAt: "desc" }).lean();
+      const posts = await Post.find().sort({ favorite: -1 }).lean();
       res.render("deals.ejs", { posts: posts });
     } catch (err) {
       console.log(err);
     }
   },
-  getPost: async (req, res) => {
+  getPost: async (req, res, next) => {
     try {
       const post = await Post.findById(req.params.id);
+      if(!post) {
+        return res.status(404).render('404', {title:"Not Found"})
+      }
       res.render("post.ejs", { post: post });
     } catch (err) {
       console.log(err);
+      next(err)
     }
   },
   getCart: async (req, res) => {
     try {
-      const posts = await Post.find().sort({ createdAt: "desc" }).lean();
+      const posts = await Post.find().sort({ favorite: -1 }).lean();
       res.render("cart.ejs", { posts: posts });
     } catch (err) {
       console.log(err);
