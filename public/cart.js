@@ -47,12 +47,16 @@ async function updateCart() {
 
   //display for empty cart
   function displayEmptyCart() {
-    let tr = document.createElement('tr')
-    let emptyCart= document.createElement('td')
+    let tableContainer= document.getElementsByClassName('tableContainer')[0]
+    tableContainer.style.display = 'none'
+    let emptyCart= document.createElement('p')
     emptyCart.textContent =`Your Cart is Currently Empty`
-    emptyCart.setAttribute('colspan', 4)
-    tr.appendChild(emptyCart)
-    document.getElementById("tbody").appendChild(tr);
+    emptyCart.style.borderTop = '1px solid black'
+    emptyCart.style.borderBottom = '1px solid black'
+    emptyCart.style.padding = '1rem'
+    let cartContainer = document.getElementsByClassName("cartContainer")[0]
+    cartContainer.appendChild(emptyCart);
+    document.getElementById('checkout-button').style.display= 'none'
   }
 
   //fetch for verified cart 

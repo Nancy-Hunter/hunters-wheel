@@ -1,41 +1,39 @@
 <%- include('partials/header') -%>
-
-    
       
-        <section class="loginContainer">
-          <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
-          <div class="alert alert-danger"><%= el.msg %></div>
-          <% }) %> <% } %> <% if (locals.messages.info) { %> <%
-          messages.info.forEach( el => { %>
-          <div class="alert alert-info"><%= el.msg %></div>
-          <% }) %> <% } %>
+      <section class="loginContainer">
+        <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
+        <div class="alert alert-danger"><%= el.msg %></div>
+        <% }) %> <% } %> <% if (locals.messages.info) { %> <%
+        messages.info.forEach( el => { %>
+        <div class="alert alert-info"><%= el.msg %></div>
+        <% }) %> <% } %>
 
-          <form action="/admin/login" method="POST" class="centered">
-            <div class="">
-              <label for="exampleInputEmail1" class=""
-                >Email address</label
-              >
-              <input
-                type="email"
-                class=""
-                id="exampleInputEmail1"
-                aria-describedby="emailHelp"
-                name="email"
-              />
-            </div>
-            <div class="">
-              <label for="exampleInputPassword1" class="">Password</label>
-              <input
-                type="password"
-                class=""
-                id="exampleInputPassword1"
-                name="password"
-              />
-            </div>
-            <button type="submit" class="">Submit</button>
-            <a href="/admin/resetPassword" class="forgotPassword">forgot password?</a>
-          </form>
-        </section>
+        <form action="/admin/login" method="POST" class="centered">
+          <div class="">
+            <label for="exampleInputEmail1" class=""
+              >Email address</label
+            >
+            <input
+              type="email"
+              class=""
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              name="email"
+            />
+          </div>
+          <div class="">
+            <label for="exampleInputPassword1" class="">Password</label>
+            <input
+              type="password"
+              class=""
+              id="exampleInputPassword1"
+              name="password"
+            />
+          </div>
+          <button type="submit" class="">Submit</button>
+          <a href="/admin/resetPassword" class="forgotPassword">forgot password?</a>
+        </form>
+      </section>
       
    
 

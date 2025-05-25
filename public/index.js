@@ -6,9 +6,12 @@ document.addEventListener("DOMContentLoaded", function () {
     seeMoreButton.addEventListener('click', function () {
         let hiddenItems = [...seeMoreTargets]
         for (let i = 0; i < 6 && i<hiddenItems.length; i++) {
-            hiddenItems[i].classList.remove('hidden')
+            // display items one at a time
+            setTimeout(()=>{
+                hiddenItems[i].classList.remove('hidden')
+            }, i * 400)
         }
-        if (hiddenItems.length == 0) {
+        if (hiddenItems.length < 6) {
             this.style.display = "none"
         }
     })

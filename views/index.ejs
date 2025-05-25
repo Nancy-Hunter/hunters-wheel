@@ -44,7 +44,7 @@
 	</section>
 <!-- Second -->
 	<section class="">
-		<h3 class="centered secondHeader">My Work</h3>
+		<!-- <h3 class="centered secondHeader">My Work</h3> -->
 		<ol class="imageGrid">
 			<!-- displayed favorite posts -->
 			<% for(let i=0; i<posts.length; i++) {%>
@@ -67,32 +67,16 @@
 		</div>
 	</section>
 
-<!-- Third -->
-
-
-<!-- Footer -->
-	<section class="footer">
-		<ul class="icons">
-			<li><a href="#" class=""><i class="fa-brands fa-instagram"></i></a></li>
-			<li><a href="#" class=""><i class="fa-brands fa-linkedin"></i></a></li>				
-			<li><a href="#" class=""><i class="fa-brands fa-github"></i></a></li>
-		</ul>
-	</section>
-
 <!-- Scripts -->
-	<script>
-		let productCount = 0;
-		if (localStorage.getItem("count")) {
-			productCount = parseInt(localStorage.getItem("count"));
-		}
-		let navCart = document.querySelector('.shopping-cart-nav')
-		if (productCount > 0) {
-			navCart.setAttribute('data-product-count', productCount);
-		}
-	</script>
-	<script src="/index.js"></script>
-	<script src="/header.js"></script>
-	<!-- <script src="assets/js/main.js"></script> -->
-
-	</body>
-</html>
+<script>
+	let productCount = 0;
+	if (localStorage.getItem("count")) {
+		productCount = parseInt(localStorage.getItem("count"));
+	}
+	let navCart = document.querySelector('.shopping-cart-nav')
+	if (productCount > 0) {
+		navCart.setAttribute('data-product-count', productCount);
+	}
+</script>
+<script src="/index.js"></script>
+<%- include('partials/footer') -%>

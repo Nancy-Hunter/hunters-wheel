@@ -50,7 +50,7 @@
   <a href="/cart" class="shopping-cart" data-product-count= '0'>
     <span class="cart-icon">&#128722;</span>
   </a>
-</body>
+</div>
 <script>
   let productCount = 0;
   if (localStorage.getItem("count")) {
@@ -60,6 +60,4 @@
 </script>
 
 <script src="/post.js"></script>
-<script src="/header.js"></script>
-
-</html>
+<%- include('partials/footer') -%>

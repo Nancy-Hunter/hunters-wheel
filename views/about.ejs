@@ -16,17 +16,15 @@
 </section>
   
  
-  <script>
-		let productCount = 0;
-		if (localStorage.getItem("count")) {
-			productCount = parseInt(localStorage.getItem("count"));
-		}
-		let navCart = document.querySelector('.shopping-cart-nav')
-		if (productCount > 0) {
-			navCart.setAttribute('data-product-count', productCount);
-		}
-	</script>
-<script src="/header.js"></script>
+<script>
+    let productCount = 0;
+    if (localStorage.getItem("count")) {
+        productCount = parseInt(localStorage.getItem("count"));
+    }
+    let navCart = document.querySelector('.shopping-cart-nav')
+    if (productCount > 0) {
+        navCart.setAttribute('data-product-count', productCount);
+    }
+</script>
 
-</body>
-</html>
+<%- include('partials/footer') -%>
