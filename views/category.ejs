@@ -7,7 +7,11 @@
       <% if (posts[i].available==true) { %>
         <li class="categoryCard">
           <a class="" href="/<%= posts[i]._id%>">
-            <img class="categoryImg" src="<%= posts[i].mainImageURL%>">
+            <img 
+            class="categoryImg" 
+            src="<%= posts[i].mainImageURL%>"
+            data-mainimg = "<%=posts[i].mainImageURL%>"
+            data-gallery="<%= posts[i].galleryImages[0]['url'] %>" >
             <p class="prodTitle centered"><%= posts[i].title %></p>
             <div class="centered">
               <% if (posts[i].onSale==true) { %>
@@ -33,4 +37,6 @@
     }
     document.querySelector('.shopping-cart').setAttribute('data-product-count', productCount)
   </script>
+
+<script src="/category.js"></script>
 <%- include('partials/footer') -%>
