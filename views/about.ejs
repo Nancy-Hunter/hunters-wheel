@@ -1,22 +1,49 @@
 
 <%- include('partials/header') -%>
  
-<section class="centered aboutSection">
-    <h2 class="">About the Artist</h2>
-    <div class="aboutContainer">
-        <div class="aboutBlurb">
-            <p class="name">Nancy Hunter</p>
-            <p>Art doesn't have to be confined to the walls never to be touched. It can be in anything and everywhere. Surround yourself with the beauty of human creativity. And please throw away that corporate slip-cast mug from some conference in 2017. You deserve more.
-            <br>
-            <br>
-            "Don't ever save anything for a special occasion. Being alive is a special occasion" -Mary Engelbreit</p>
-        </div>
-        <img src="/images/profile-picture.jpg" alt="">
+<section class="customArtContainer">
+    <h2 class="customArt">Custom Art</h2>
+    <div class="customBlurb centered">
+        <p>Designed by You and Crafted by Me</p>
+        <p>Only limited by your imagination. Ever wanted a vase with an ocotpus crawling up the side or a mug with a dwarven inscription of your favorite DnD quote? Can't find that exact jar with a fish as a handle? Then let's make it. Pricing starts at $50 per piece and goes up depending on complexity and size. Discounts possible for larger orders.</p> 
+        <p>Let's talk and make a plan.</p>
     </div>
 </section>
-  
- 
-<script>
+<section class="contactFormSection">
+    <h3>CONTACT FORM</h3>
+    <div class="contactFormContainer">
+        <form id="contactForm" class="contactForm" method="POST" enctype="multipart/form-data" action="https://formsubmit.co/el/xedoru">
+            <input name="name" type="text" placeholder="NAME">
+            <input name="preferredContact" type="text" placeholder="E-MAIL or TELEPHONE">
+            <textarea name="message" type="text" placeholder="DESCRIBE ART HERE"></textarea>
+            <div class="fileUploadWrapper">
+                    <label for="reference" class="fileUploadButton">Choose File</label>
+                    <span id="fileUploadText">No file chosen (OPTIONAL)</span>
+                    <input id="reference" name="reference" type="file" accept="image/*" />
+                    <button type="button" id="clearFileButton">X Clear</button>
+                </div>
+                <div class="previewWrapper">
+                    <img id="previewImage" src="" alt="Preview" />
+                </div>
+                <input id="submit" type="submit" value="GO!">
+            </form>
+        </div>
+    </section>
+    <section class="centered aboutSection">
+        <h2 class="">About the Artist</h2>
+        <div class="aboutContainer">
+            <div class="aboutBlurb">
+                <p class="name">Nancy Hunter</p>
+                <p>Art doesn't have to be confined to the walls never to be touched. It can be in anything and everywhere. Surround yourself with the beauty of human creativity. And please throw away that corporate slip-cast mug from some conference in 2017. You deserve more.
+                <br>
+                <br>
+                "Don't ever save anything for a special occasion. Being alive is a special occasion" -Mary Engelbreit</p>
+            </div>
+            <img src="/images/profile-picture.jpg" alt="">
+        </div>
+    </section>
+    
+    <script>
     let productCount = 0;
     if (localStorage.getItem("count")) {
         productCount = parseInt(localStorage.getItem("count"));
@@ -26,5 +53,5 @@
         navCart.setAttribute('data-product-count', productCount);
     }
 </script>
-
+<script src="/about.js"></script>
 <%- include('partials/footer') -%>

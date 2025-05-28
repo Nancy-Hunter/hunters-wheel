@@ -10,6 +10,28 @@ thumbnails.forEach((thumb) => {
   })
 })
 
+// modal popup for larger image
+document.addEventListener('DOMContentLoaded', function () {
+  const modal = document.getElementById("imageModal");
+  const modalImg = document.getElementById("modalImage");
+  const closeBtn = document.querySelector(".close");
+
+  leadImage.addEventListener('click', function () {
+      modal.style.display = "block";
+      modalImg.src = this.src;
+    });
+  
+  closeBtn.onclick = function () {
+    modal.style.display = "none";
+  }
+  // close modal when clicking outside image
+  modal.onclick = function (e) {
+    if (e.target === modal) {
+      modal.style.display = "none";
+    }
+  }
+});
+
 //set up for add to cart at post and cart
 let cart = JSON.parse(localStorage.getItem("cart")) || {};
 let count = Number(localStorage.getItem("count")) || 0;
@@ -56,7 +78,6 @@ function addToCart(event) {
   const form = button.closest(".addToCartForm")
   const select = form.querySelector(".selectQty")
   const qty = Number(select.value)
-  console.log(id, price)
   const currentQtyInCart = cart[id]?.qty || 0
   const newTotalQty = currentQtyInCart + qty
 
@@ -86,15 +107,17 @@ function addToCart(event) {
     option.style.color = isDisabled ? 'white' : 'black' 
   })
 
-  if (maxAvailable <= 0) {
-    button.disabled = true
-    select.disabled = true
-  }
-  
   let shoppingCart = document.querySelector('.shopping-cart')
   shoppingCart.classList.add('active');
   shoppingCart.setAttribute('data-product-count', count)
   setTimeout(() => {
     shoppingCart.classList.remove('active');
-}, 1000)
+  }, 1000)
+
+  if (maxAvailable <= 0) {
+    button.disabled = true
+    select.disabled = true
+    window.location.reload()
+  }
+  
 }

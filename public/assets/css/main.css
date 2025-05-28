@@ -169,6 +169,85 @@ header, .customNav {
     padding: 7rem 4.5rem;
     font-size: 2.3rem;
 }
+/* custom work */
+.customContainer, 
+.customContainer * {
+  user-select: none;
+}
+.sectionCustom {
+    margin-top:4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.sectionCustom h2 {
+    font-size: 2rem;
+    text-align: center;
+}
+.sectionCustom p {
+    font-size: 1.3rem;
+    margin-top: .4rem;
+    text-align: center;
+}
+.customContainer {
+    margin: 2rem 0 3rem;
+    position: relative;
+    width: 40rem;
+    height: 20rem;
+    overflow: hidden;
+}
+.customImg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.sliderLine {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 3;
+    cursor: ew-resize;
+}
+.slider {
+    background-color: whitesmoke;
+    border-radius: 50%;
+    width:2rem;
+    height: 2rem;
+    text-align: center;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    line-height: 2rem;
+    top: 50%;
+    position: absolute;
+    z-index:5
+}
+.line {
+    width:3px;
+    height: 100%;
+    background-color: whitesmoke;
+}
+#customImgTop {
+    z-index: 2;
+    clip-path: inset(0 50% 0 0); /* Show only left half initially */
+}
+@media (min-width: 1500px) {
+  .customContainer {
+    width: 50rem; 
+    height: 30rem;
+  }
+}
+
 /* recent work */
 .secondHeader {
     padding: 0 0 1rem 0;
@@ -179,7 +258,7 @@ header, .customNav {
     overflow: hidden;
     opacity: 1;
     max-height: 1000px;
-    transition: opacity 2s ease, max-height 1s ease;
+    transition: opacity 1s ease, max-height 1s ease;
 }
 .productCard:hover .frontpageImg {
     transform: scale(1.2); 
@@ -236,6 +315,26 @@ header, .customNav {
     font-weight: 600;
     padding-bottom: 2rem;
 }
+.customArtContainer {
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.customArt {
+    font-size: 2.4rem;
+    margin-bottom: 1rem;
+}
+.customBlurb {
+    font-size: 1.2rem;
+    max-width: 800px;
+    padding: 0 4rem;
+    line-height: 1.5rem;
+}
+.customBlurb p:first-child {
+    margin: 2rem;
+}
 @media (max-width: 700px) {
     .aboutContainer {
         flex-direction: column;
@@ -253,6 +352,164 @@ header, .customNav {
     .aboutBlurb {
         padding: 6rem 13rem;
     }
+}
+
+/* contact form styles */
+
+.contactFormSection h3 {
+    margin: 100px 0 25px 0;
+    font-size: 2.3em;
+    text-align: center;
+    letter-spacing: 7px;
+}
+.contactFormContainer {
+    padding: 2rem 0;
+    background: #e2dedb;
+    color: #b3aca7;
+}
+.contactForm {
+    width: 500px;
+    margin: 50px auto;
+}
+
+.contactForm input {
+    color: #b3aca7;
+    font-size: 1rem;
+    width:  100%;
+    height: 50px;
+    padding: 0px 15px 0px 15px;
+    
+    background: transparent;
+    outline: none;
+    color: black;
+    
+    border: solid 1px #b3aca7;
+    border-bottom: none;
+    
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+}
+
+.contactForm input:hover, .contactForm label:hover {
+    background: #b3aca7;
+    color: black;
+}
+
+.contactForm textarea {
+    width: 500px;
+    max-width: 500px;
+    height: 110px;
+    max-height: 110px;
+    padding: 15px;
+    
+    background: transparent;
+    outline: none;
+    
+    color: black;
+    font-size: 1rem;
+    
+    border: solid 1px #b3aca7;
+    border-bottom: none;
+    
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+}
+
+.contactForm textarea:hover {
+    background: #b3aca7;
+    color: black;
+}
+
+/* Container around file input */
+.fileUploadWrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.3s ease-in-out;
+    border: solid 1px #b3aca7;
+    font-family: 'Quicksand', sans-serif;
+    padding: 10px 0 20px;
+}
+
+/* Hide actual input */
+#reference {
+    display: none;
+}
+
+/* Style the fake file input button */
+.fileUploadButton {
+    margin-left: 1.5rem;
+    font-family: 'Quicksand', sans-serif;
+    padding: 10px 30px;
+    background: #b3aca7;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    border-radius: 4px;
+}
+
+.fileUploadButton:hover {
+    background-color: #7a756f;
+}
+
+/* File name display text */
+#fileUploadText {
+    font-size: 0.9rem;
+    color: #333;
+}
+.previewWrapper {
+  margin-top: 1rem;
+  justify-content: center;
+  align-items: center;
+  display: none; /* Hidden until image is loaded */
+}
+#previewImage {
+  max-width: 100%;
+  max-height: 300px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Clear button style */
+#clearFileButton {
+  background-color: transparent;
+  border: 1px solid #b3aca7;
+  color: #7a756f;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+#clearFileButton:hover {
+  background-color: #b3aca7;
+  color: white;
+}
+#submit {
+    width: 100%;
+    
+    padding: 0;
+    margin: -5px 0px 0px 0px;
+    
+    font-size: 1rem;
+    color: rgb(48, 45, 45);
+    
+    outline:none;
+    cursor: pointer;
+    
+    border: solid 1px #b3aca7;
+    border-top: none;
+}
+
+#submit:hover {
+  color: #e2dedb;
 }
 
 /* footer */
@@ -396,7 +653,7 @@ s {
     margin: 0 0 3rem 0;
 }
 .buttonContainer {
-    padding: 2rem 3rem 1rem;
+    padding: 2rem 3rem .7rem;
     display: flex;
     justify-content: space-around;
     align-items: center; 
@@ -413,6 +670,42 @@ s {
     font-family: "Marcellus", serif;
     width: 70%;
 }
+/* post modal image styles */
+.imageModal {
+    display: none; 
+    position: fixed;
+    z-index: 2;
+    padding-top: 5rem;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.9);
+}
+.imageModal .modalContent {
+  margin: auto;
+  display: block;
+  max-width: 80%;
+  max-height: 80%;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+.imageModal .close {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  background-color: transparent;
+  color: whitesmoke;
+  font-size: 3rem;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.imageModal .close:hover {
+  color: #bbb;
+}
 
 /* mobile media queries for post page */
 
@@ -426,7 +719,7 @@ s {
     }
     .buttonContainer {
         flex-direction: column;
-        padding: 2rem 0 1rem;
+        padding: 2rem 0 .55rem;
     }
     .IMAGES {
         width: 75%;
@@ -550,7 +843,7 @@ td:nth-child(5) { width: 10%; } /* Delete */
         flex-direction: column;
         width: 40%;
     }
-    .ghostButton {
+    .cartGhostButton {
         background-color: rgba(144, 214, 144, 0.781);
         width: 100%;
     }

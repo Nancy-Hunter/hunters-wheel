@@ -1,71 +1,85 @@
 <!DOCTYPE HTML>
 
 <html>
-	<head>
-		<title>Hunter's Wheel</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="/assets/css/Eric Meyers Reset.css" />
-		<link rel="stylesheet" href="/assets/css/main.css" />
-		<link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon.png"/>
-		<script src="https://kit.fontawesome.com/42df4c29ec.js" crossorigin="anonymous"></script>
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
-	</head>
-	<body class="is-preload">
+<head>
+	<title>Hunter's Wheel</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="/assets/css/Eric Meyers Reset.css" />
+	<link rel="stylesheet" href="/assets/css/main.css" />
+	<link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon.png"/>
+	<script src="https://kit.fontawesome.com/42df4c29ec.js" crossorigin="anonymous"></script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+</head>
+<body class="is-preload">
 
 <!-- Header -->
-		<header class="header">
-			<a href="/">
-				<h1 class = 'title centered'>The Hunter's Wheel</h1>
-			</a>
-			<nav class="customNav">
-				<div class="dropdownContainer">
-					<button class="link" id="dropdownButton">Shop</button>
-					<div id="dropdownContent" class ="dropdownContent" role="menu"
-					aria-hidden="true">
-						<a href="/category/cups" role="menuitem">Cups</a>
-						<a href="/category/bowls" role="menuitem">Bowls</a>
-						<a href="/category/plates" role="menuitem">Plates</a>
-						<a href="/category/just%20art" role="menuitem">Just Art</a>
-					</div>
-				</div>
-				<a class = "link" href="/about">About</a>
-				<a class = "link shopping-cart-nav" href="/cart">Cart</a>
-			</nav>
-		</header>
-	
-		<img class='heroImgFrontPage' src="../../images/tools.jpg" alt="">
-
-<!-- First -->
-	<section class="">
-		<h2 class="tagline centered">Don't just buy art. Use it!</h2>	
-	</section>
-<!-- Second -->
-	<section class="">
-		<!-- <h3 class="centered secondHeader">My Work</h3> -->
-		<ol class="imageGrid">
-			<!-- displayed favorite posts -->
-			<% for(let i=0; i<posts.length; i++) {%>
-				<!-- Start of list item round1-->
-				<% if (posts[i].available==true) { %>
-	
-						<li class="productCard <%= i >= 6 ? 'hidden' : '' %>" id ="<%= posts[i].id %>" >
-							<a href="/<%= posts[i]._id%>" class="">
-							<img class="frontpageImg" src="<%= posts[i].mainImageURL%>">
-							</a>
-							<!-- image and anchor -->
-						</li>
-					
-				<% } %>
-			<% } %>
-		</ol>	
-				
-		<div class="centered">
-			<button class="seeMoreButton ghostButton">See More<span class="">See More</span></button>
+<header class="header">
+	<a href="/">
+		<h1 class = 'title centered'>The Hunter's Wheel</h1>
+	</a>
+	<nav class="customNav">
+		<div class="dropdownContainer">
+			<button class="link" id="dropdownButton">Shop</button>
+			<div id="dropdownContent" class ="dropdownContent" role="menu"
+			aria-hidden="true">
+				<a href="/category/cups" role="menuitem">Cups</a>
+				<a href="/category/bowls" role="menuitem">Bowls</a>
+				<a href="/category/plates" role="menuitem">Plates</a>
+				<a href="/category/just%20art" role="menuitem">Just Art</a>
+			</div>
 		</div>
-	</section>
+		<a class = "link" href="/about">About</a>
+		<a class = "link shopping-cart-nav" href="/cart">Cart</a>
+	</nav>
+</header>
+
+<img class='heroImgFrontPage' src="../../images/tools.jpg" alt="">
+
+<!-- Tagline Section -->
+<section class="">
+	<h2 class="tagline centered">Don't just buy art. Use it!</h2>	
+</section>
+
+	
+	
+<!-- Current Work -->
+<section class="">
+	<!-- <h3 class="centered secondHeader">My Work</h3> -->
+	<ol class="imageGrid">
+		<% for(let i=0; i<posts.length; i++) {%>
+			<!-- Start of list item-->
+			<% if (posts[i].available==true) { %>
+				<li class="productCard <%= i >= 6 ? 'hidden' : '' %>" id ="<%= posts[i].id %>" >
+					<!-- image and anchor -->
+					<a href="/<%= posts[i]._id%>" class="">
+						<img class="frontpageImg" src="<%= posts[i].mainImageURL%>">
+					</a>
+				</li>
+			<% } %>
+		<% } %>
+	</ol>	
+	<div class="centered">
+		<button class="seeMoreButton ghostButton">See More<span class="">See More</span></button>
+	</div>
+</section>
+				
+<!-- Custom work -->
+<section class="sectionCustom">
+	<h2 class="">Custom Ceramics Designed Just for You</h2>
+	<p class="">Let's make something beautiful together</p>
+	<div class="customContainer">
+		<img src="../../images/drawingMug3.jpg" alt="" class="customImg" id="customImgBottom" draggable="false">
+		<img src="../../images/woodenMug.jpg" class="customImg" id="customImgTop" draggable="false">
+		<div class="sliderLine">
+			<div class='line'></div>
+			<div class="slider">&lt; &gt;</div>
+		</div>
+	</div> 
+	<a href="/about" class="ghostButton">Show Me Your Idea<span>Let's Make Art</span></a>	
+</section>
 
 <!-- Scripts -->
 <script>
@@ -79,4 +93,5 @@
 	}
 </script>
 <script src="/index.js"></script>
+
 <%- include('partials/footer') -%>
