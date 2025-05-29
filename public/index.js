@@ -64,8 +64,9 @@ window.addEventListener('touchend', () => {
 window.addEventListener('touchmove', (e) => {
     if (!isDragging) return;
 
+    const touch = e.touches[0]
     const containerRect = container.getBoundingClientRect();
-    let offsetX = e.clientX - containerRect.left;
+    let offsetX = touch.clientX - containerRect.left;
     
     // Clamp value between 0 and container width
     offsetX = Math.max(0, Math.min(offsetX, containerRect.width));
