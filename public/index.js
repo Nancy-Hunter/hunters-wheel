@@ -50,3 +50,30 @@ window.addEventListener('mousemove', (e) => {
     const percent = (offsetX / containerRect.width) * 100;
     imgTop.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
 });
+
+// functionality for mobile
+
+slider.addEventListener('touchstart', (e) => {
+    isDragging = true;
+});
+
+window.addEventListener('touchend', () => {
+    isDragging = false;
+});
+
+window.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+
+    const containerRect = container.getBoundingClientRect();
+    let offsetX = e.clientX - containerRect.left;
+    
+    // Clamp value between 0 and container width
+    offsetX = Math.max(0, Math.min(offsetX, containerRect.width));
+    
+    // Move the slider
+    slider.style.left = `${offsetX}px`;
+
+    // Adjust the top image width via clip-path
+    const percent = (offsetX / containerRect.width) * 100;
+    imgTop.style.clipPath = `inset(0 ${100 - percent}% 0 0)`;
+});
