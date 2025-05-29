@@ -952,29 +952,36 @@ select option {
     margin-top: 8rem;	
 }
 
-/* login styles */
-.loginContainer {
+/* signin/password styles */
+.authContainer {
     margin: 4rem auto;
     line-height: 1.5rem;
     font-family: 'Quicksand', sans-serif;
     font-size: 1.1rem;
 }
-.loginContainer button {
+.authContainer button, .alertDanger, .alertInfo {
     margin: 1rem auto;
     font-size: 1rem;
     border: 1px solid;
     border-radius: 5px;
     padding: .3rem 1rem;
 }
-.loginContainer input {
+.authContainer input {
+    font-size: 1rem;
     margin-top: .5rem;
-    padding: .3rem;
+    padding: .4rem;
     border: 1px solid;
     border-radius: 5px;
 }
 .forgotPassword {
     display: block;
     margin-top: 2rem;
+}
+.alertDanger {
+    background-color: rgb(241, 172, 144);
+}
+.alertInfo {
+    background-color: rgb(192, 235, 192);
 }
 /* error pages */
 .error {

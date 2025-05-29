@@ -20,12 +20,14 @@ router.put("/updateQuantity/:id", adminController.updateQuantity);
 router.put("/isFavorite/:id", adminController.isFavorite);
 router.delete("/deletePost/:id", adminController.deletePost);
 
-//Auth login/logout/reset
+//Auth login/logout/reset 
 router.get("/login", authController.getLogin);
 router.post("/login", authController.postLogin);
-router.get("/resetPassword", authController.getResetPassword);
-//router.post("resetPassword", authController.resetPassword);
 router.get("/logout", authController.logout);
+router.get("/forgotPassword", authController.getForgotPassword);
+router.post("/resetPassword", authController.resetPassword);
+router.get("/updatePassword/:token", authController.getUpdatePassword);
+router.post("/updatePassword", authController.updatePassword);
 
 //dev only?/ auth controller
 router.get("/signup", authController.getSignup);

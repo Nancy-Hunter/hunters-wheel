@@ -1,37 +1,46 @@
 <%- include('partials/header') -%>
       
-      <section class="loginContainer">
-        <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
-        <div class="alert alert-danger"><%= el.msg %></div>
-        <% }) %> <% } %> <% if (locals.messages.info) { %> <%
-        messages.info.forEach( el => { %>
-        <div class="alert alert-info"><%= el.msg %></div>
-        <% }) %> <% } %>
+      <section class="authContainer">
+
+        <% if (locals.messages.errors) { %> 
+          <% messages.errors.forEach( el => { %>
+            <div class="alertDanger centered">
+              <%= el.msg %>
+            </div>
+          <% }) %> 
+        <% } %> 
+        <% if (locals.messages.info) { %> 
+          <% messages.info.forEach( el => { %>
+            <div class="alertInfo centered">
+              <%= el.msg %>
+            </div>
+          <% }) %> 
+        <% } %>
+        <!-- weird behavior (two message info divs/ one empty) when password reset because errors arent sent in an array like in regular validation but i dont really care to fix it -->
+        <% if (messages.info) { %> 
+          <div class="centered alertInfo">
+            <%= messages.info %>
+          </div>
+        <% } %> 
 
         <form action="/admin/login" method="POST" class="centered">
           <div class="">
-            <label for="exampleInputEmail1" class=""
-              >Email address</label
-            >
+            <label for="email" class="">Email address</label>
             <input
               type="email"
               class=""
-              id="exampleInputEmail1"
               aria-describedby="emailHelp"
-              name="email"
-            />
+              name="email"/>
           </div>
           <div class="">
-            <label for="exampleInputPassword1" class="">Password</label>
+            <label for="password" class="">Password</label>
             <input
               type="password"
-              class=""
-              id="exampleInputPassword1"
-              name="password"
-            />
+              class="" 
+              name="password"/>
           </div>
           <button type="submit" class="">Submit</button>
-          <a href="/admin/resetPassword" class="forgotPassword">forgot password?</a>
+          <a href="/admin/forgotPassword" class="forgotPassword">forgot password?</a>
         </form>
       </section>
       
