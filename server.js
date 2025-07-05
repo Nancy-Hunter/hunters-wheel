@@ -15,6 +15,7 @@ const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const adminRoutes = require("./routes/admin");
 const stripeRoutes = require("./routes/stripeRoutes");
+const webhookRoutes = require("./routes/webhookRoutes");
 const multer = require('multer');
 
 
@@ -29,6 +30,9 @@ app.set("view engine", "ejs");
 
 //Static Folder
 app.use(express.static("./public"));
+
+//webhook route must be before body parser middleware
+app.use("/checkout", webhookRoutes)
 
 //Body Parsing
 app.use(express.urlencoded({ extended: true }));
