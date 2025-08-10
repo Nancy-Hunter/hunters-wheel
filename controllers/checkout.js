@@ -1,8 +1,8 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/postSchema");
 const mongoose = require("mongoose");
-
-const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET_CLI; // from Stripe dashboard
+// const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET_CLI -- USE IN DEVELOPMENT instead of STRIPE_WEBHOOK_SECRET from Stripe dashboard
+const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET // from Stripe dashboard
 const stripe = require('../middleware/stripe');
 
 module.exports = {
@@ -76,9 +76,6 @@ module.exports = {
 
   //WEBHOOK
   checkoutWebhook: async (req, res) => {
-    console.log("Top of checkoutWebhook!")
-    console.log("Contents of checkoutWebhook's req: " + JSON.stringify(req, null, 4))
-    console.log("Contents of checkoutWebhook's res: " + JSON.stringify(res, null, 4))
     const sig = req.headers['stripe-signature'];
 
     let event;
