@@ -66,9 +66,6 @@ module.exports = {
   },
 
   getSuccess: async (req, res) => {
-    console.log("Contents of req: " + JSON.stringify(req, null, 4))
-    console.log("Contents of res: " + JSON.stringify(res, null, 4))
-    checkoutWebhook(req, res)
     res.render('success.ejs'); // Express looks in views/success.ejs
   },
   
