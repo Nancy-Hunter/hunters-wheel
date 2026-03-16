@@ -55,7 +55,7 @@
 				<li class="productCard <%= i >= 6 ? 'hidden' : '' %>" id ="<%= posts[i].id %>" >
 					<!-- image and anchor -->
 					<a href="/<%= posts[i]._id%>" class="">
-						<img class="frontpageImg" src="<%= posts[i].mainImageURL%>">
+						<img class="frontpageImg" src="<%= posts[i].mainImageURL.replace('/upload/', '/upload/f_auto,q_auto,w_800/')%>" loading="lazy">
 					</a>
 				</li>
 			<% } %>

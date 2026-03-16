@@ -140,7 +140,7 @@ exports.resetPassword = async (req, res) => {
   const tokenHash = crypto.createHash("sha256").update(token).digest("hex");
   //save in mongoDB tokenHash and expiry
   user.resetPasswordToken = tokenHash;
-  user.resetPasswordExpires = Date.now() + 1000 * 60 * 120; // 120 mins
+  user.resetPasswordExpires = Date.now() + 1000 * 60 * 20; // 20 mins
   await user.save();
   
   //change to url on liveload
