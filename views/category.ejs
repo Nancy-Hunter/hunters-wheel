@@ -9,7 +9,8 @@
           <a class="" href="/<%= posts[i]._id%>">
             <img 
             class="categoryImg" 
-            src="<%= posts[i].mainImageURL%>"
+            src="<%= posts[i].mainImageURL.replace('/upload/', '/upload/f_auto,q_auto,w_800/')%>" 
+            loading="lazy"
             data-mainimg = "<%=posts[i].mainImageURL%>"
             data-gallery="<%= posts[i].galleryImages[0]['url'] %>" >
             <p class="prodTitle centered"><%= posts[i].title %></p>
